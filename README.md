@@ -1,5 +1,9 @@
 # First-pygame-project
 ## Multi-level quest
-It will be interesting in realisation and there will be lots of different things
-There will be different way to pass every level
-Maybe, there will be beautiful graphics (if we will have some time to this)
+* Interesting in realisation  
+* Lots of different and exciting things to explore  
+* Some interesting plot  
+* Different ways to pass levels  
+* Beautiful graphics[^1]  
+  
+[^1]if we will have some time to do this
