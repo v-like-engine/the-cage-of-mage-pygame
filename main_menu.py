@@ -1,3 +1,5 @@
+from os import path
+
 import pygame
 
 class MainMenu():
@@ -7,6 +9,47 @@ class MainMenu():
         self.height = height
         self.color = (150, 150, 150)
         self.buttons()
+
+        self.all_sprites = pygame.sprite.Group()
+        self.web = 'web.jpg'
+        self.web = self.load_image(self.web)
+        for i in range(10):
+            self.web_sprite = pygame.sprite.Sprite()
+            self.web_sprite.image = self.web
+            self.web_sprite.rect = self.web_sprite.image.get_rect()
+            self.web_sprite.rect.x = -100 + 236 * i
+            self.web_sprite.rect.y = -50
+            self.all_sprites.add(self.web_sprite)
+
+        for i in range(10):
+            self.web_sprite = pygame.sprite.Sprite()
+            self.web_sprite.image = self.web
+            self.web_sprite.rect = self.web_sprite.image.get_rect()
+            self.web_sprite.rect.x = -100
+            self.web_sprite.rect.y = -50 + 208 * i
+            self.all_sprites.add(self.web_sprite)
+
+        for i in range(10):
+            self.web_sprite = pygame.sprite.Sprite()
+            self.web_sprite.image = self.web
+            self.web_sprite.rect = self.web_sprite.image.get_rect()
+            self.web_sprite.rect.x = -100 + 236 * i
+            self.web_sprite.rect.y = self.height - 100
+            self.all_sprites.add(self.web_sprite)
+
+        for i in range(10):
+            self.web_sprite = pygame.sprite.Sprite()
+            self.web_sprite.image = self.web
+            self.web_sprite.rect = self.web_sprite.image.get_rect()
+            self.web_sprite.rect.x = -100 - 236 * i
+            self.web_sprite.rect.y = self.height - 100
+            self.all_sprites.add(self.web_sprite)
+
+
+    def load_image(self, name):
+        fullname = path.join('data', name)
+        image = pygame.image.load(fullname).convert()
+        return image
 
     def buttons(self):
         self.font = pygame.font.Font(None, 50)

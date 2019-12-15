@@ -19,6 +19,7 @@ class Game:
             self.loop()
             self.render()
             main_menu = MainMenu(self.width, self.height, self.screen)
+            main_menu.all_sprites.draw(self.screen)
             pygame.display.flip()
         pygame.quit()
 
@@ -56,6 +57,6 @@ class TheCageOfMage(Game):
         main_menu = MainMenu(self.width, self.height, self.screen)
 
 
-game = TheCageOfMage(1024, 768)
+game = TheCageOfMage(1100, 700)
 game.start()
 game.execute()
