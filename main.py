@@ -1,5 +1,8 @@
 import pygame
 
+from main_menu import MainMenu
+
+
 class Game:
     def __init__(self, width, height):
         self.size = self.width, self.height = width, height
@@ -15,6 +18,7 @@ class Game:
                 self.handle_event(event)
             self.loop()
             self.render()
+            main_menu = MainMenu(self.width, self.height, self.screen)
             pygame.display.flip()
         pygame.quit()
 
@@ -32,6 +36,7 @@ class Game:
 class TheCageOfMage(Game):
     def __init__(self, width, height):
         super().__init__(width, height)
+        self.execute()
         # Сюда необходимо добавить информацию о поле
 
     def handle_event(self, event):
@@ -47,6 +52,10 @@ class TheCageOfMage(Game):
         # self.board.render(self.screen)
         # Поле, когда оно появится)))
 
+    def start(self):
+        main_menu = MainMenu(self.width, self.height, self.screen)
 
-game = TheCageOfMage(1366, 768)
+
+game = TheCageOfMage(1024, 768)
+game.start()
 game.execute()
