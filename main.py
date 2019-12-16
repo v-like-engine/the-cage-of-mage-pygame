@@ -18,7 +18,10 @@ class Game:
                 self.handle_event(event)
             self.loop()
             self.render()
-            main_menu = MainMenu(self.width, self.height, self.screen)
+            try:
+                main_menu = MainMenu(self.width, self.height, self.screen, event.pos)
+            except AttributeError:
+                main_menu = MainMenu(self.width, self.height, self.screen)
             main_menu.all_sprites.draw(self.screen)
             pygame.display.flip()
         pygame.quit()
