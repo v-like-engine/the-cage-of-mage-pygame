@@ -7,6 +7,8 @@ class Game:
     def __init__(self, width, height):
         self.size = self.width, self.height = width, height
         self.FPS = 60
+        self.is_mouse_button_up = False
+        self.is_mouse_button_down = False
         pygame.init()
         self.screen = pygame.display.set_mode(self.size)
         self.clock = pygame.time.Clock()
@@ -19,9 +21,9 @@ class Game:
             self.loop()
             self.render()
             try:
-                main_menu = MainMenu(self.width, self.height, self.screen, event.pos)
+                main_menu = MainMenu(self.width, self.height, self.screen, event.pos, event=self.is_mouse_button_down)
             except AttributeError:
-                main_menu = MainMenu(self.width, self.height, self.screen)
+                main_menu = MainMenu(self.width, self.height, self.screen, event=self.is_mouse_button_down)
             main_menu.all_sprites.draw(self.screen)
             pygame.display.flip()
         pygame.quit()
@@ -29,6 +31,10 @@ class Game:
     def handle_event(self, event):
         if event.type == pygame.QUIT:
             self.running = False
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            self.is_mouse_button_down = True
+        else:
+            self.is_mouse_button_down = False
 
     def loop(self):
         self.clock.tick(self.FPS)
@@ -45,7 +51,6 @@ class TheCageOfMage(Game):
 
     def handle_event(self, event):
         super().handle_event(event)
-        # Здесь будут события
 
     def loop(self):
         super().loop()

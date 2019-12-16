@@ -2,10 +2,15 @@ from os import path
 
 import pygame
 
+from level_1 import Level1
+from training import Training
+
+
 class MainMenu():
-    def __init__(self, width, height, screen, mouse_coords=None):
+    def __init__(self, width, height, screen, mouse_coords=None, event=None):
         self.screen = screen
         self.mouse_coords = mouse_coords
+        self.event = event
         self.width = width
         self.height = height
         self.color = (150, 150, 150)
@@ -33,7 +38,19 @@ class MainMenu():
             y1 = self.all_buttons[button][3]
             if x <= self.mouse_coords[0] <= x1 and y <= self.mouse_coords[1] <= y1:
                 self.highlighting(x, y, x1, y1)
+                self.start_game(button)
                 break
+
+    def start_game(self, button_text):
+        if button_text == 'continue' and self.event == True:
+            level = Level1()
+            print('кря')
+        if button_text == 'new_game' and self.event == True:
+            level = Level1()
+            print('кря')
+        if button_text == 'training' and self.event == True:
+            level = Training()
+            print('кря')
 
     def highlighting(self, x, y, x1, y1):
         pygame.draw.rect(self.screen, pygame.Color('white'), (x + 2, y + 2, x1 - x - 2, y1 - y - 2), 1)
