@@ -44,13 +44,10 @@ class MainMenu():
     def start_game(self, button_text):
         if button_text == 'continue' and self.event == True:
             level = Level1()
-            print('кря')
         if button_text == 'new_game' and self.event == True:
             level = Level1()
-            print('кря')
         if button_text == 'training' and self.event == True:
             level = Training()
-            print('кря')
 
     def highlighting(self, x, y, x1, y1):
         pygame.draw.rect(self.screen, pygame.Color('white'), (x + 2, y + 2, x1 - x - 2, y1 - y - 2), 1)
