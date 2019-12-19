@@ -1,6 +1,6 @@
 import pygame
 
-from main_menu import MainMenu
+from main_menu import MainMenuButton
 
 
 class Game:
@@ -18,11 +18,6 @@ class Game:
                 self.handle_event(event)
             self.loop()
             self.render()
-            try:
-                main_menu = MainMenu(self.width, self.height, self.screen, event.pos, event=self.is_mouse_button_down)
-            except AttributeError:
-                main_menu = MainMenu(self.width, self.height, self.screen, event=self.is_mouse_button_down)
-            main_menu.all_sprites.draw(self.screen)
             pygame.display.flip()
         pygame.quit()
 
@@ -40,10 +35,39 @@ class Game:
 class TheCageOfMage(Game):
     def __init__(self, width, height):
         super().__init__(width, height)
-        self.execute()
-        self.is_mouse_button_up = False
         self.is_mouse_button_down = False
-        # Сюда необходимо добавить информацию о поле
+        self.buttons_sprites = pygame.sprite.Group()
+        self.buttons = []
+        self.draw_buttons()
+        self.execute()
+
+    def draw_buttons(self):
+        try:
+            self.x = self.width // 5 * 3
+            self.y = self.height // 2
+            texts = ['Continue', 'Start a new game', 'Training', 'Settings']
+            for i in range(len(texts)):
+                new_btn = MainMenuButton(self.buttons_sprites, self.screen, self.x, self.y + self.height // 15 * i,
+                                         self.width, self.height,
+                                         self.is_mouse_button_down, texts[i])
+                self.buttons.append(new_btn)
+                self.buttons_sprites.add(new_btn)
+        except AttributeError:
+            pass
+
+    def execute(self):
+        while self.running:
+            for event in pygame.event.get():
+                self.handle_event(event)
+            self.loop()
+            self.buttons_sprites.update()
+            self.render()
+            self.buttons_sprites.draw(self.screen)
+            pygame.display.flip()
+        self.terminate()
+
+    def terminate(self):
+        pygame.quit()
 
     def handle_event(self, event):
         super().handle_event(event)
