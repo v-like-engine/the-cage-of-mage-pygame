@@ -7,8 +7,6 @@ class Game:
     def __init__(self, width, height):
         self.size = self.width, self.height = width, height
         self.FPS = 60
-        self.is_mouse_button_up = False
-        self.is_mouse_button_down = False
         pygame.init()
         self.screen = pygame.display.set_mode(self.size)
         self.clock = pygame.time.Clock()
@@ -31,10 +29,6 @@ class Game:
     def handle_event(self, event):
         if event.type == pygame.QUIT:
             self.running = False
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            self.is_mouse_button_down = True
-        else:
-            self.is_mouse_button_down = False
 
     def loop(self):
         self.clock.tick(self.FPS)
@@ -47,10 +41,16 @@ class TheCageOfMage(Game):
     def __init__(self, width, height):
         super().__init__(width, height)
         self.execute()
+        self.is_mouse_button_up = False
+        self.is_mouse_button_down = False
         # Сюда необходимо добавить информацию о поле
 
     def handle_event(self, event):
         super().handle_event(event)
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            self.is_mouse_button_down = True
+        else:
+            self.is_mouse_button_down = False
 
     def loop(self):
         super().loop()
@@ -61,10 +61,6 @@ class TheCageOfMage(Game):
         # self.board.render(self.screen)
         # Поле, когда оно появится)))
 
-    def start(self):
-        main_menu = MainMenu(self.width, self.height, self.screen)
-
 
 game = TheCageOfMage(1100, 700)
-game.start()
 game.execute()
