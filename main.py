@@ -12,6 +12,9 @@ class Game:
         self.clock = pygame.time.Clock()
         self.running = True
 
+    def terminate(self):
+        pygame.quit()
+
     def execute(self):
         while self.running:
             for event in pygame.event.get():
@@ -19,11 +22,13 @@ class Game:
             self.loop()
             self.render()
             pygame.display.flip()
-        pygame.quit()
+        self.terminate()
 
     def handle_event(self, event):
         if event.type == pygame.QUIT:
             self.running = False
+        if event.type == pygame.KEYDOWN and event.key in [pygame.KMOD_ALT, pygame.K_F4]:
+            self.terminate()
 
     def loop(self):
         self.clock.tick(self.FPS)
