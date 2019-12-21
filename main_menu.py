@@ -2,9 +2,6 @@ from os import path
 
 import pygame
 
-from level_1 import Level1
-from training import Training
-
 
 class MainMenuButton(pygame.sprite.Sprite):
     def __init__(self, group, screen, x, y, width, height, event, text):
