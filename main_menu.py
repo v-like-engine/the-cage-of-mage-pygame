@@ -15,29 +15,30 @@ class MainMenuButton(pygame.sprite.Sprite):
         self.h = self.height // 15
         self.x = x
         self.y = y
-        self.image = pygame.Surface([self.w, self.h])
+        self.image = self.load_image('button.png')
         self.rect = self.image.get_rect()
         self.rect.x = self.x
         self.rect.y = self.y
+        self.rect.w = self.w
+        self.rect.h = self.h
         self.color = pygame.Color('grey')
-        pygame.draw.rect(self.image, self.color, (0, 0, self.w, self.h), 1)
 
         self.font = pygame.font.Font(None, 50)
         self.text = self.font.render(text, 1, self.color)
-        self.image.blit(self.text, (self.w // 2 - self.text.get_width() // 2,
-                                    self.h // 2 - self.text.get_height() // 2))
+        self.image.blit(self.text, (self.rect.w // 2 - 20 - self.text.get_width() // 2,
+                                    self.rect.h // 3 * 4 - self.text.get_height() // 2))
 
         self.all_sprites = pygame.sprite.Group()
         self.web = 'web.jpg'
         self.web = self.load_image(self.web)
 
-
-    def load_image(self, name):
+    def load_image(self, name, colorkey=None):
         fullname = path.join('data', name)
-        image = pygame.image.load(fullname).convert()
+        image = pygame.image.load(fullname).convert_alpha()
+        if colorkey is not None:
+            if colorkey == -1:
+                colorkey = image.get_at((0, 0))
+            image.set_colorkey(colorkey)
+        else:
+            image = image.convert_alpha()
         return image
-'''
-    def highlighting(self):
-        light = pygame.Rect(2, 2, self.w - 2, self.h - 2)
-        pygame.draw.rect(self.light_image, pygame.Color('white'), light, 1)
-'''
