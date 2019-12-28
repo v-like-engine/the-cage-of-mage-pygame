@@ -4,15 +4,11 @@ import pygame
 
 
 class MainMenuButton(pygame.sprite.Sprite):
-    def __init__(self, group, screen, x, y, width, height, event, text):
+    def __init__(self, group, screen, x, y, event, text):
         super().__init__(group)
         self.group = group
         self.screen = screen
         self.event = event
-        # self.width = width
-        # self.height = height
-        # self.w = self.width // 5 * 2
-        # self.h = self.height // 15
         self.x = x
         self.y = y
         self.stock = self.load_image('button.png')
