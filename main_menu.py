@@ -4,8 +4,9 @@ import pygame
 
 
 class MainMenuButton(pygame.sprite.Sprite):
-    def __init__(self, group, screen, x, y, width, height, event, text):
+    def __init__(self, group, screen, x, y, width, height, event, text, pos):
         super().__init__(group)
+        self.pos = pos
         self.group = group
         self.screen = screen
         self.event = event
@@ -15,7 +16,9 @@ class MainMenuButton(pygame.sprite.Sprite):
         self.h = self.height // 15
         self.x = x
         self.y = y
-        self.image = self.load_image('button.png')
+        self.stock = self.load_image('button.png')
+        self.highlighting_image = self.load_image('targeted.png')
+        self.image = self.stock
         self.rect = self.image.get_rect()
         self.rect.x = self.x
         self.rect.y = self.y
@@ -42,3 +45,12 @@ class MainMenuButton(pygame.sprite.Sprite):
         else:
             image = image.convert_alpha()
         return image
+
+    def update(self):
+        self.pos = pygame.mouse.get_pos()
+        mouse_x = self.pos[0]
+        mouse_y = self.pos[1]
+        if self.rect.x <= mouse_x <= self.rect.x + self.width and self.rect.y <= mouse_y <= self.rect.y:
+            self.image = self.highlighting_image
+        else:
+            self.image = self.stock
