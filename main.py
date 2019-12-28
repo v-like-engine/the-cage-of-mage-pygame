@@ -6,7 +6,7 @@ from main_menu import MainMenuButton
 class Game:
     def __init__(self, width, height):
         self.size = self.width, self.height = width, height
-        self.FPS = 60
+        self.FPS = 30
         pygame.init()
         self.screen = pygame.display.set_mode(self.size)
         self.clock = pygame.time.Clock()
@@ -55,7 +55,7 @@ class TheCageOfMage(Game):
             for i in range(len(texts)):
                 new_btn = MainMenuButton(self.buttons_sprites, self.screen, self.x, self.y + self.height // 5 * i,
                                          self.width, self.height,
-                                         self.is_mouse_button_down, texts[i], pygame.mouse.get_pos())
+                                         self.is_mouse_button_down, texts[i])
                 self.buttons.append(new_btn)
                 self.buttons_sprites.add(new_btn)
         except AttributeError:
@@ -66,9 +66,9 @@ class TheCageOfMage(Game):
             for event in pygame.event.get():
                 self.handle_event(event)
             self.loop()
-            self.buttons_sprites.update()
             self.render()
             self.buttons_sprites.draw(self.screen)
+            self.buttons_sprites.update()
             pygame.display.flip()
         self.terminate()
 
