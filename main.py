@@ -27,8 +27,9 @@ class Game:
     def handle_event(self, event):
         if event.type == pygame.QUIT:
             self.running = False
-        if event.type == pygame.KEYDOWN and event.key in [pygame.KMOD_ALT, pygame.K_F4]:
-            self.terminate()
+        if event.type == pygame.KEYDOWN and pygame.key.get_mods() & pygame.KMOD_ALT:
+            if event.key == pygame.K_F4:
+                self.running = False
 
     def loop(self):
         self.clock.tick(self.FPS)
