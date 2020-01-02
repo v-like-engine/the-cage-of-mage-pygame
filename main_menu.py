@@ -11,8 +11,8 @@ class MainMenuButton(pygame.sprite.Sprite):
         self.event = event
         self.x = x
         self.y = y
-        self.stock = self.load_image('button.png')
-        self.highlighting_image = self.load_image('targeted.png')
+        self.stock = self.load_image('butt_n.png')
+        self.highlighting_image = self.load_image('target.png')
         self.image = self.stock
         self.rect: pygame.Rect = self.image.get_rect()
         self.rect.x = self.x

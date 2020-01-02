@@ -49,7 +49,7 @@ class TheCageOfMage(Game):
 
     def draw_buttons(self):
         try:
-            self.x = self.width // 7 * 4
+            self.x = self.width // 3 * 2
             self.y = self.height // 4
             texts = ['Continue', 'New game', 'Training']
             for i in range(len(texts)):
@@ -92,5 +92,5 @@ class TheCageOfMage(Game):
         # Поле, когда оно появится)))
 
 
-game = TheCageOfMage(1100, 700)
+game = TheCageOfMage(1280, 720)
 game.execute()
