@@ -3,7 +3,7 @@ from os import path
 import pygame
 
 
-def load_image(self, name, colorkey=None):
+def load_image(name, colorkey=None):
     fullname = path.join('data', name)
     image = pygame.image.load(fullname).convert_alpha()
     if colorkey is not None:
