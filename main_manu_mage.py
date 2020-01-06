@@ -3,7 +3,7 @@ import pygame
 from load_image import load_image
 
 
-class Mage(pygame.sprite.Sprite):
+class MainMenuMage(pygame.sprite.Sprite):
     def __init__(self, group, screen, x, y):
         super().__init__(group)
         self.group = group

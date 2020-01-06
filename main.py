@@ -1,7 +1,7 @@
 import pygame
 
-from mage import Mage
-from main_menu import MainMenuButton
+from main_manu_mage import MainMenuMage
+from main_menu_buttons import MainMenuButton
 
 
 class Game:
@@ -60,7 +60,7 @@ class TheCageOfMage(Game):
                                          self.is_mouse_button_down, texts[i])
                 self.buttons.append(new_btn)
                 self.buttons_sprites.add(new_btn)
-            mage = Mage(self.mage_sprite, self.screen, 100, 100)
+            mage = MainMenuMage(self.mage_sprite, self.screen, 100, 100)
         except AttributeError:
             pass
 
