@@ -32,11 +32,18 @@ class Mage(AnimatedSprite):
         super().__init__(load_image('mage pictures.png'), 8, 4, x, y)
         self.velocity = [0, 0]
         self.direction = 0
+        self.g = 1
 
-    def update(self, event=None, *borders):
-        if not event:
-            return
+    def update(self, event=None, v=0, *borders):
+        if not pygame.sprite.spritecollideany(self, borders[0]):
+            self.velocity = self.velocity[0], 1
+            self.change_coords(2, v, self.g)
+            self.g += 0.2
+        else:
+            self.velocity = self.velocity[0], 0
+            self.g = 1
         if event.type == pygame.KEYDOWN:
+            print(borders)
             self.direction = -1
             if event.key == pygame.K_LEFT:
                 self.direction = 1
@@ -48,23 +55,15 @@ class Mage(AnimatedSprite):
                 self.cur_frame = (self.cur_frame + 1) % (len(self.frames) // 2)
                 frame = self.direction * 16 + self.cur_frame
                 self.image = self.frames[frame]
-                if frame not in [15, 31]:
-                    if borders:
-                        if len(borders) == 4:
-                            if borders[1] > 10 * self.velocity[0] + self.rect.x > borders[0]:
-                                self.change_coords(1, 10)
-                            if borders[3] > 10 * self.velocity[1] + self.rect.x > borders[2]:
-                                self.change_coords(2, 10)
-                        else:
-                            self.change_coords(0, 10)
-                    else:
-                        self.change_coords(0, 10)
+                if frame not in [15, 31] and not pygame.sprite.spritecollideany(self, borders[1]):
+                    self.change_coords(0, 10)
+            # self.move(self.x, self.y + 10 / FPS)
 
-    def change_coords(self, x_or_y, step):
+    def change_coords(self, x_or_y, step, *g):
         if x_or_y == 0:
             self.rect.x += step * self.velocity[0]
             self.rect.y += step * self.velocity[1]
         elif x_or_y == 1:
             self.rect.x += step * self.velocity[0]
         else:
-            self.rect.y += step * self.velocity[1]
+            self.rect.y += step * self.velocity[1] * g[0]
