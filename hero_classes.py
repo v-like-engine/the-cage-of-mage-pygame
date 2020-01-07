@@ -48,10 +48,10 @@ class Mage(AnimatedSprite):
             self.direction = -1
             if event.key == pygame.K_LEFT:
                 self.direction = 1
-                self.velocity = -1, 0
+                self.velocity = -1, self.velocity[1]
             if event.key == pygame.K_RIGHT:
                 self.direction = 0
-                self.velocity = 1, 0
+                self.velocity = 1, self.velocity[1]
             if self.direction != -1:
                 self.cur_frame = (self.cur_frame + 1) % (len(self.frames) // 2)
                 frame = self.direction * 16 + self.cur_frame
