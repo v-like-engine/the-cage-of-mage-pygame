@@ -55,8 +55,9 @@ class Mage(AnimatedSprite):
                 self.cur_frame = (self.cur_frame + 1) % (len(self.frames) // 2)
                 frame = self.direction * 16 + self.cur_frame
                 self.image = self.frames[frame]
-                if frame not in [15, 31] and not pygame.sprite.spritecollideany(self, borders[1]):
-                    self.change_coords(0, 10)
+                self.change_coords(0, 10)
+                if frame in [15, 31] or pygame.sprite.spritecollideany(self, borders[1]):
+                    self.change_coords(0, -10)
             # self.move(self.x, self.y + 10 / FPS)
 
     def change_coords(self, x_or_y, step, *g):
