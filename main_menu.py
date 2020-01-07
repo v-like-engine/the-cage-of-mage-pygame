@@ -2,7 +2,6 @@ from os import path
 
 import pygame
 
-
 class MainMenuButton(pygame.sprite.Sprite):
     def __init__(self, group, screen, x, y, event, text):
         super().__init__(group)
@@ -18,6 +17,7 @@ class MainMenuButton(pygame.sprite.Sprite):
         self.rect.x = self.x
         self.rect.y = self.y
         self.color = pygame.Color('grey')
+        self.text = text
 
         font = pygame.font.Font(None, 50)
         text = font.render(text, 1, self.color)
@@ -44,5 +44,11 @@ class MainMenuButton(pygame.sprite.Sprite):
     def update(self):
         if self.rect.collidepoint(*pygame.mouse.get_pos()):
             self.image = self.highlighting_image
+            for event in pygame.event.get():
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    print(self.text)
+                    if self.text == 'Training':
+                        import training
+                        return
         else:
             self.image = self.stock
