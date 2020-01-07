@@ -1,10 +1,10 @@
-import os
+from os import path
 
 import pygame
 
 
 def load_image(name, colorkey=None):
-    fullname = os.path.join('data', name)
+    fullname = path.join('data', name)
     image = pygame.image.load(fullname).convert_alpha()
     if colorkey is not None:
         if colorkey == -1:

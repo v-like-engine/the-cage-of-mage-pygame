@@ -1,6 +1,6 @@
 import pygame
 
-from utils import load_image
+from load_image import load_image
 
 
 class Background(pygame.sprite.Sprite):
