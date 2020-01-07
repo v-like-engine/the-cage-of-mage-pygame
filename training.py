@@ -3,9 +3,12 @@ from hero_classes import Mage
 
 import pygame
 
-FPS = 15
+FPS = 30
 WIDTH = 1280
 HEIGHT = 720
+pygame.init()
+pygame.mixer_music.load('data/Kytami-Sirens.mp3')
+pygame.mixer_music.play(0, 0.0)
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 clock = pygame.time.Clock()
 ticks = 0

@@ -41,6 +41,8 @@ class Game:
 class TheCageOfMage(Game):
     def __init__(self, width, height):
         super().__init__(width, height)
+        pygame.mixer_music.load('data/Arti-Fix - Cybernetic Sect.mp3')
+        pygame.mixer_music.play(0, 0.0)
         self.is_mouse_button_down = False
         self.buttons_sprites = pygame.sprite.Group()
         self.buttons = []
