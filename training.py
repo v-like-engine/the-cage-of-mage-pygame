@@ -3,7 +3,7 @@ from hero_classes import Mage
 
 import pygame
 
-FPS = 30
+FPS = 15
 WIDTH = 1280
 HEIGHT = 720
 screen = pygame.display.set_mode((WIDTH, HEIGHT))

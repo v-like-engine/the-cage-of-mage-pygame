@@ -33,6 +33,7 @@ class Mage(AnimatedSprite):
         self.velocity = [0, 0]
         self.direction = 0
         self.g = 1
+        self.up = False
 
     def update(self, event=None, v=0, *borders):
         self.change_coords(2, v, self.g)
@@ -52,6 +53,10 @@ class Mage(AnimatedSprite):
             if event.key == pygame.K_RIGHT:
                 self.direction = 0
                 self.velocity = 1, self.velocity[1]
+            if event.key == pygame.K_UP and self.velocity[1] == 0 and not self.up:
+                self.direction = -1
+                self.velocity = self.velocity[0], -20
+                self.up = True
             if self.direction != -1:
                 self.cur_frame = (self.cur_frame + 1) % (len(self.frames) // 2)
                 frame = self.direction * 16 + self.cur_frame
@@ -60,6 +65,8 @@ class Mage(AnimatedSprite):
                 if frame in [15, 31] or pygame.sprite.spritecollideany(self, borders[1]):
                     self.change_coords(0, -10)
             # self.move(self.x, self.y + 10 / FPS)
+        if event.type == pygame.KEYUP:
+            self.up = False
 
     def change_coords(self, x_or_y, step, *g):
         if x_or_y == 0:
