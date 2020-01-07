@@ -35,11 +35,12 @@ class Mage(AnimatedSprite):
         self.g = 1
 
     def update(self, event=None, v=0, *borders):
+        self.change_coords(2, v, self.g)
         if not pygame.sprite.spritecollideany(self, borders[0]):
             self.velocity = self.velocity[0], 1
-            self.change_coords(2, v, self.g)
             self.g += 0.2
         else:
+            self.change_coords(2, -v, self.g)
             self.velocity = self.velocity[0], 0
             self.g = 1
         if event.type == pygame.KEYDOWN:
