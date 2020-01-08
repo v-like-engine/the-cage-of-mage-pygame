@@ -26,7 +26,9 @@ class Box(SimpleSprite):
             self.change_coords(2, -v, self.g)
             self.velocity = self.velocity[0], 0
             self.g = 1
-        if self.mage.x + 70 >= self.x and self.mage.y + self.mage.rect.height == self.y + self.rect.height:
+        print(self.mage.x)
+        print(self.x)
+        if self.mage.x + 259 >= self.x:
             self.direction = 0
             self.velocity = 1, self.velocity[1]
         else:
