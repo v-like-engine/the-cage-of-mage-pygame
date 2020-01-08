@@ -1,5 +1,7 @@
 import pygame
 
+from Logo import Logo
+from Mage_main_menu import MageMainMenu
 from main_menu import MainMenuButton
 
 
@@ -47,6 +49,10 @@ class TheCageOfMage(Game):
         self.buttons_sprites = pygame.sprite.Group()
         self.buttons = []
         self.draw_buttons()
+        self.logo_group = pygame.sprite.Group()
+        self.logo = Logo(self.logo_group, self.screen, width // 50, -20)
+        self.mage_main_menu_group = pygame.sprite.Group()
+        self.mage_main_menu = MageMainMenu(self.mage_main_menu_group, self.screen, width // 12, self.height // 4)
         self.execute()
 
     def draw_buttons(self):
@@ -69,8 +75,12 @@ class TheCageOfMage(Game):
                 self.handle_event(event)
             self.loop()
             self.render()
+            self.logo_group.draw(self.screen)
             self.buttons_sprites.draw(self.screen)
+            self.mage_main_menu_group.draw(self.screen)
+            self.logo_group.update()
             self.buttons_sprites.update()
+            self.mage_main_menu_group.update()
             pygame.display.flip()
         self.terminate()
 
