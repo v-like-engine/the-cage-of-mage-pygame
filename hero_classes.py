@@ -37,6 +37,8 @@ class Mage(AnimatedSprite):
         self.g = 1
         self.up = False
         self.box_group = box_group
+        self.mask = pygame.mask.from_surface(self.image)
+        self.chest = None
 
     def update(self, event=None, v=0, *borders):
         self.change_coords(2, v, self.g)
@@ -66,7 +68,7 @@ class Mage(AnimatedSprite):
                 self.image = self.frames[frame]
                 self.change_coords(0, 10)
                 if frame in [15, 31] or pygame.sprite.spritecollideany(self, borders[1]) or \
-                        pygame.sprite.spritecollideany(self, self.box_group):
+                        pygame.sprite.collide_mask(self, self.chest):
                     self.change_coords(0, -10)
             # self.move(self.x, self.y + 10 / FPS)
         if event.type == pygame.KEYUP:
@@ -82,3 +84,6 @@ class Mage(AnimatedSprite):
             self.rect.y += step * self.velocity[1] * g[0]
         self.x = self.rect.x
         self.y = self.rect.y
+
+    def add_chest(self, chest):
+        self.chest = chest
