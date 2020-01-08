@@ -6,6 +6,8 @@ from load_image import load_image
 class AnimatedSprite(pygame.sprite.Sprite):
     def __init__(self, sheet, columns, rows, x, y):
         super().__init__()
+        self.x = x
+        self.y = y
         self.animation_fps = 10
         self.frames = []
         self.cut_sheet(sheet, columns, rows)
@@ -76,3 +78,5 @@ class Mage(AnimatedSprite):
             self.rect.x += step * self.velocity[0]
         else:
             self.rect.y += step * self.velocity[1] * g[0]
+        self.x = self.rect.x
+        self.y = self.rect.y

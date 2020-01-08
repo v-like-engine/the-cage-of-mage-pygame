@@ -1,4 +1,5 @@
 from background_sprites import Background, Border
+from box import Box
 from hero_classes import Mage
 
 import pygame
@@ -16,6 +17,7 @@ all_sprites = pygame.sprite.Group()
 mage_group = pygame.sprite.Group()
 border_b = pygame.sprite.Group()
 borders = pygame.sprite.Group()
+box_group = pygame.sprite.Group()
 
 
 training_background = Background('training.jpg', 0, -30)
@@ -37,12 +39,17 @@ while running:
             running = False
         if event.type == pygame.KEYDOWN:
             mage.update(event, 10, border_b, borders)
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            box = Box(box_group, screen, *event.pos, mage)
+            box_group.add(box)
     screen.fill(pygame.Color("#383636"))
     all_sprites.draw(screen)
     border_b.draw(screen)
     borders.draw(screen)
+    box_group.draw(screen)
     mage_group.draw(screen)
     mage_group.update(event, 10, border_b, borders)
+    box_group.update(event, 10, border_b, borders)
     pygame.display.flip()
     clock.tick(FPS)
     ticks += 1
