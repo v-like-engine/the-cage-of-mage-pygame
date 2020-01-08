@@ -35,7 +35,7 @@ class Mage(AnimatedSprite):
         self.velocity = [0, 0]
         self.direction = 0
         self.v = 180 / fps
-        self.g = 1
+        self.g = 0
         self.up = False
         self.box_group = box_group
         self.mask = pygame.mask.from_surface(self.image)
@@ -60,13 +60,13 @@ class Mage(AnimatedSprite):
                 self.velocity = 1, self.velocity[1]
             if event.key == pygame.K_UP and self.velocity[1] == 0 and not self.up:
                 self.direction = -1
-                self.velocity = self.velocity[0], -20
+                self.velocity = self.velocity[0], -4
                 self.up = True
             if self.direction != -1:
                 self.cur_frame = (self.cur_frame + 1) % (len(self.frames) // 2)
                 frame = self.direction * 16 + self.cur_frame
                 self.image = self.frames[frame]
-                self.change_coords(0, 10)
+                self.change_coords(0)
                 if self.chest:
                     if frame in [15, 31] or pygame.sprite.spritecollideany(self, borders[1]) or \
                             pygame.sprite.collide_mask(self, self.chest):
