@@ -30,11 +30,12 @@ class AnimatedSprite(pygame.sprite.Sprite):
 
 
 class Mage(AnimatedSprite):
-    def __init__(self, x, y, box_group):
+    def __init__(self, x, y, fps, box_group):
         super().__init__(load_image('mage pictures.png'), 8, 4, x, y)
         self.velocity = [0, 0]
         self.direction = 0
         self.g = 1
+        self.v = 150 / fps
         self.up = False
         self.box_group = box_group
         self.mask = pygame.mask.from_surface(self.image)
@@ -78,14 +79,14 @@ class Mage(AnimatedSprite):
         if event.type == pygame.KEYUP:
             self.up = False
 
-    def change_coords(self, x_or_y, step, *g):
+    def change_coords(self, x_or_y, *g):
         if x_or_y == 0:
-            self.rect.x += step * self.velocity[0]
-            self.rect.y += step * self.velocity[1]
+            self.rect.x += self.v * self.velocity[0]
+            self.rect.y += self.v * self.velocity[1]
         elif x_or_y == 1:
-            self.rect.x += step * self.velocity[0]
+            self.rect.x += self.v * self.velocity[0]
         else:
-            self.rect.y += step * self.velocity[1] * g[0]
+            self.rect.y += self.v * self.velocity[1] * g[0]
         self.x = self.rect.x
         self.y = self.rect.y
 
