@@ -15,4 +15,5 @@ class Border(pygame.sprite.Sprite):
         super().__init__()
         self.image = pygame.Surface([x, y])
         self.rect = self.image.get_rect().move(move_x, move_y)
+        self.coords = move_x, move_y, move_x + x, move_y + y
         pygame.draw.rect(self.image, pygame.Color(0, 0, 0), (move_x, move_y, x, y))

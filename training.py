@@ -10,8 +10,7 @@ HEIGHT = 720
 pygame.init()
 pygame.mixer_music.load('data/Kytami-Sirens.mp3')
 pygame.mixer_music.play(0, 0.0)
-pygame.mixer_music.set_volume(pygame.mixer_music.get_volume() * 0.02)
-print(pygame.mixer_music.get_volume())
+pygame.mixer_music.set_volume(0.049)
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 clock = pygame.time.Clock()
 ticks = 0
