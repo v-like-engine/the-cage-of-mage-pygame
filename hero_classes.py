@@ -67,9 +67,13 @@ class Mage(AnimatedSprite):
                 frame = self.direction * 16 + self.cur_frame
                 self.image = self.frames[frame]
                 self.change_coords(0, 10)
-                if frame in [15, 31] or pygame.sprite.spritecollideany(self, borders[1]) or \
-                        pygame.sprite.collide_mask(self, self.chest):
-                    self.change_coords(0, -10)
+                if self.chest:
+                    if frame in [15, 31] or pygame.sprite.spritecollideany(self, borders[1]) or \
+                            pygame.sprite.collide_mask(self, self.chest):
+                        self.change_coords(0, -10)
+                else:
+                    if frame in [15, 31] or pygame.sprite.spritecollideany(self, borders[1]):
+                        self.change_coords(0, -10)
             # self.move(self.x, self.y + 10 / FPS)
         if event.type == pygame.KEYUP:
             self.up = False
