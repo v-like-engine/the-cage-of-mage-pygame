@@ -13,6 +13,7 @@ class Training(Game):
         pygame.mixer_music.play()
         pygame.mixer_music.set_volume(pygame.mixer_music.get_volume() * 0.02)
         self.ticks = 0
+        self.chest = None
 
         self.all_sprites = pygame.sprite.Group()
         self.mage_group = pygame.sprite.Group()
@@ -48,7 +49,7 @@ class Training(Game):
             self.mage_group.draw(self.screen)
 
             self.mage_group.update(event, 10, self.border_b, self.borders)
-            self.chest_group.update(event, 10, self.border_b, self.borders)
+            self.chest_group.update()
 
             pygame.display.flip()
             self.clock.tick(self.FPS)
@@ -60,10 +61,15 @@ class Training(Game):
         if event.type == pygame.KEYDOWN:
             self.mage.update(event, 10, self.border_b, self.borders)
         if event.type == pygame.MOUSEBUTTONDOWN:
-            chest = Chest(self.chest_group, self.screen, *event.pos)
-            self.chest_group.add(chest)
-            self.all_sprites.add(chest)
-            self.mage.add_chest(chest)
+            self.chest = Chest(self.chest_group, self.screen, *event.pos)
+            self.chest_group.add(self.chest)
+            self.all_sprites.add(self.chest)
+            self.mage.add_chest(self.chest)
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_o and self.chest and \
+                    abs(self.mage.x + self.mage.image.get_width() - self.chest.x) <= 230 and \
+                    abs(self.mage.y + self.mage.image.get_height() - self.chest.y) <= 230:
+                self.chest.open()
 
     def render(self):
         self.screen.fill(pygame.Color('#383636'))

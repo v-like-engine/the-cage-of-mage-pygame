@@ -52,7 +52,7 @@ while running:
     chest_group.draw(screen)
     mage_group.draw(screen)
     mage_group.update(event, 10, border_b, borders)
-    chest_group.update(event, 10, border_b, borders)
+    chest_group.update()
     pygame.display.flip()
     clock.tick(FPS)
     ticks += 1
