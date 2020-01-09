@@ -1,43 +1,9 @@
 import pygame
 
+from Game import Game
 from Logo import Logo
 from Mage_main_menu import MageMainMenu
 from main_menu import MainMenuButton
-
-
-class Game:
-    def __init__(self, width, height):
-        self.size = self.width, self.height = width, height
-        self.FPS = 30
-        pygame.init()
-        self.screen = pygame.display.set_mode(self.size)
-        self.clock = pygame.time.Clock()
-        self.running = True
-
-    def terminate(self):
-        pygame.quit()
-
-    def execute(self):
-        while self.running:
-            for event in pygame.event.get():
-                self.handle_event(event)
-            self.loop()
-            self.render()
-            pygame.display.flip()
-        self.terminate()
-
-    def handle_event(self, event):
-        if event.type == pygame.QUIT:
-            self.running = False
-        if event.type == pygame.KEYDOWN and pygame.key.get_mods() & pygame.KMOD_ALT:
-            if event.key == pygame.K_F4:
-                self.running = False
-
-    def loop(self):
-        self.clock.tick(self.FPS)
-
-    def render(self):
-        pass
 
 
 class TheCageOfMage(Game):
@@ -54,6 +20,7 @@ class TheCageOfMage(Game):
         self.logo = Logo(self.logo_group, self.screen, width // 50, -20)
         self.mage_main_menu_group = pygame.sprite.Group()
         self.mage_main_menu = MageMainMenu(self.mage_main_menu_group, self.screen, width // 12, self.height // 4)
+        print('утка')
         self.execute()
 
     def draw_buttons(self):
@@ -103,7 +70,3 @@ class TheCageOfMage(Game):
         self.screen.fill(pygame.Color('black'))
         # self.board.render(self.screen)
         # Поле, когда оно появится)))
-
-
-game = TheCageOfMage(1280, 720)
-game.execute()

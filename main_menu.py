@@ -2,6 +2,9 @@ from os import path
 
 import pygame
 
+from new_training import Training
+
+
 class MainMenuButton(pygame.sprite.Sprite):
     def __init__(self, group, screen, x, y, event, text):
         super().__init__(group)
@@ -26,10 +29,6 @@ class MainMenuButton(pygame.sprite.Sprite):
         self.stock.blit(text, text_rect)
         self.highlighting_image.blit(text, text_rect)
 
-        # self.all_sprites = pygame.sprite.Group()
-        # self.web = 'web.jpg'
-        # self.web = self.load_image(self.web)
-
     def load_image(self, name, colorkey=None):
         fullname = path.join('data', name)
         image = pygame.image.load(fullname).convert_alpha()
@@ -48,7 +47,7 @@ class MainMenuButton(pygame.sprite.Sprite):
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     print(self.text)
                     if self.text == 'Training':
-                        import training
+                        Training(1280, 720)
                         return
         else:
             self.image = self.stock
