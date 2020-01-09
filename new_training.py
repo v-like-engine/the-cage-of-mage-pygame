@@ -1,5 +1,6 @@
 import pygame
 
+from Chair import Chair
 from background_sprites import Background, Border
 from chest import Chest
 from hero_classes import Mage
@@ -20,6 +21,7 @@ class Training(Game):
         self.border_b = pygame.sprite.Group()
         self.borders = pygame.sprite.Group()
         self.chest_group = pygame.sprite.Group()
+        self.chair_group = pygame.sprite.Group()
 
         training_background = Background('training.jpg', 0, -30)
         training_background.add(self.all_sprites)
@@ -32,6 +34,10 @@ class Training(Game):
         self.mage = Mage(50, 0, self.FPS, self.chest_group)
         self.mage.add(self.all_sprites)
         self.mage.add(self.mage_group)
+
+        # decorations
+        self.chair = Chair(self.chair_group, self.screen, 200, 200)
+
         pygame.key.set_repeat(10)
         self.execute()
 
@@ -47,9 +53,11 @@ class Training(Game):
             self.borders.draw(self.screen)
             self.chest_group.draw(self.screen)
             self.mage_group.draw(self.screen)
+            self.chair_group.draw(self.screen)
 
             self.mage_group.update(event, 10, self.border_b, self.borders)
             self.chest_group.update()
+            self.chair_group.update()
 
             pygame.display.flip()
             self.clock.tick(self.FPS)
