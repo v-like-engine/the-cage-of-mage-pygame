@@ -9,7 +9,7 @@ class AnimatedSprite(pygame.sprite.Sprite):
         self.x = x
         self.y = y
         self.frames = []
-        resize = resize if resize else False
+        resize = resize or False
         self.cut_sheet(sheet, columns, rows, resize)
         self.cur_frame = 0
         self.image = self.frames[self.cur_frame]

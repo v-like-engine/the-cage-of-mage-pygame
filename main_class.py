@@ -14,7 +14,7 @@ class Game:
         self.clock = pygame.time.Clock()
         self.running = True
         pygame.mouse.set_visible(False)
-        self.cursor = Cursor(6, 120, 120)
+        self.cursor = Cursor(6, 30, 30)
 
     def terminate(self):
         pygame.quit()
@@ -46,6 +46,5 @@ class Game:
         self.clock.tick(self.FPS)
 
     def render(self):
-        self.screen.fill(pygame.Color('black'))
         if pygame.mouse.get_focused():
             self.screen.blit(self.cursor.cursor, self.cursor.position)

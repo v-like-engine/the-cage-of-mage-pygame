@@ -8,7 +8,7 @@ from load_image import load_image
 class Cursor:
     def __init__(self, curs, *size):
         arrow_image = load_image('cursors_next_gen.png')
-        size = size if size else False
+        size = size or False
         self.position = [0, 0]
         self.frames = []
         self.cut_sheet(arrow_image, curs, 40, size)
@@ -24,5 +24,5 @@ class Cursor:
             y = 0
             print(x, y, width, height)
             image = sheet.subsurface(x, y, width, height)
-            pygame.transform.scale(image, size)
+            image = pygame.transform.scale(image, size)
             self.frames.append(image)
