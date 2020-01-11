@@ -44,13 +44,13 @@ class TheCageOfMage(Game):
         while self.running:
             for event in pygame.event.get():
                 self.handle_event(event)
+                self.buttons_sprites.update(event)
             self.loop()
             self.render()
             self.logo_group.draw(self.screen)
             self.buttons_sprites.draw(self.screen)
             self.mage_main_menu_group.draw(self.screen)
             self.logo_group.update()
-            self.buttons_sprites.update()
             self.mage_main_menu_group.update()
             pygame.display.flip()
         self.terminate()
@@ -69,6 +69,3 @@ class TheCageOfMage(Game):
     def loop(self):
         super().loop()
         # Здесь движение
-
-    def render(self):
-        self.screen.fill(pygame.Color('black'))

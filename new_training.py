@@ -50,7 +50,6 @@ class Training(Game):
             if self.stop:
                 return
             self.loop()
-            self.render()
 
             self.all_sprites.draw(self.screen)
             self.border_b.draw(self.screen)
@@ -66,6 +65,7 @@ class Training(Game):
             pygame.display.flip()
             self.clock.tick(self.FPS)
             self.ticks += 1
+            self.render()
         self.terminate()
 
     def handle_event(self, event):
@@ -87,6 +87,3 @@ class Training(Game):
                 pygame.mixer_music.play(0, 44.0)
                 pygame.mixer_music.set_volume(0.049)
                 self.stop = True
-
-    def render(self):
-        self.screen.fill(pygame.Color('#383636'))

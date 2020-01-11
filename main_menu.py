@@ -40,14 +40,13 @@ class MainMenuButton(pygame.sprite.Sprite):
             image = image.convert_alpha()
         return image
 
-    def update(self):
+    def update(self, event):
         if self.rect.collidepoint(*pygame.mouse.get_pos()):
             self.image = self.highlighting_image
-            for event in pygame.event.get():
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    print(self.text)
-                    if self.text == 'Training':
-                        Training(1280, 720)
-                        return
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                print(self.text)
+                if self.text == 'Training':
+                    Training(1280, 720)
+                    return
         else:
             self.image = self.stock
