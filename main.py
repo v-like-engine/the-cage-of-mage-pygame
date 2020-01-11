@@ -57,6 +57,7 @@ class TheCageOfMage(Game):
 
     def terminate(self):
         pygame.quit()
+        sys.exit(0)
 
     def handle_event(self, event):
         super().handle_event(event)
