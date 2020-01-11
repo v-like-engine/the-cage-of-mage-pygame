@@ -34,7 +34,7 @@ class Mage(AnimatedSprite):
         super().__init__(load_image('mage pictures.png'), 8, 4, x, y)
         self.velocity = [0, 0]
         self.direction = 0
-        self.v = 180 / fps
+        self.v = 360 / fps
         self.g = 0
         self.up = False
         self.box_group = box_group
