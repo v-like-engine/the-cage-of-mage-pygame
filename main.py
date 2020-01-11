@@ -71,5 +71,3 @@ class TheCageOfMage(Game):
 
     def render(self):
         self.screen.fill(pygame.Color('black'))
-        # self.board.render(self.screen)
-        # Поле, когда оно появится)))
