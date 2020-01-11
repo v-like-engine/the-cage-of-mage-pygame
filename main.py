@@ -11,8 +11,8 @@ class TheCageOfMage(Game):
         super().__init__(width, height)
         pygame.mixer_music.stop()
         pygame.mixer_music.load('data/Arti-Fix - Cybernetic Sect.mp3')
-        pygame.mixer_music.play(0, 44.0)
         pygame.mixer_music.set_volume(0.049)
+        pygame.mixer_music.play(10, 44.0)
         self.is_mouse_button_down = False
         self.buttons_sprites = pygame.sprite.Group()
         self.buttons = []
@@ -21,7 +21,7 @@ class TheCageOfMage(Game):
         self.logo = Logo(self.logo_group, self.screen, width // 50, -20)
         self.mage_main_menu_group = pygame.sprite.Group()
         self.mage_main_menu = MageMainMenu(self.mage_main_menu_group, self.screen, width // 12, self.height // 4)
-        print('утка')
+        print('не утка')
         self.execute()
 
     def draw_buttons(self):

@@ -11,7 +11,7 @@ class Training(Game):
     def __init__(self, width, height):
         super().__init__(width, height)
         pygame.mixer_music.load('data/Kytami-Sirens.mp3')
-        pygame.mixer_music.play(0, 0.0)
+        pygame.mixer_music.play(100, 0.0)
         pygame.mixer_music.set_volume(0.049)
         self.ticks = 0
         self.chest = None
@@ -31,14 +31,14 @@ class Training(Game):
         border_right = Border(32, 720, 1248, 0)
         border_left.add(self.borders)
         border_right.add(self.borders)
-        self.mage = Mage(50, 0, self.FPS, self.chest_group)
+        self.mage = Mage(50, 420, self.FPS, self.chest_group)
         self.mage.add(self.all_sprites)
         self.mage.add(self.mage_group)
 
         self.stop = False
 
         # decorations
-        self.chair = Chair(self.chair_group, self.screen, 200, 200)
+        self.chair = Chair(self.chair_group, self.screen, 1080, 540)
 
         pygame.key.set_repeat(10)
         self.execute()
