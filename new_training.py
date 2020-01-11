@@ -35,6 +35,8 @@ class Training(Game):
         self.mage.add(self.all_sprites)
         self.mage.add(self.mage_group)
 
+        self.stop = False
+
         # decorations
         self.chair = Chair(self.chair_group, self.screen, 200, 200)
 
@@ -45,6 +47,8 @@ class Training(Game):
         while self.running:
             for event in pygame.event.get():
                 self.handle_event(event)
+            if self.stop:
+                return
             self.loop()
             self.render()
 
@@ -78,6 +82,11 @@ class Training(Game):
                     abs(self.mage.x + self.mage.image.get_width() - self.chest.x) <= 230 and \
                     abs(self.mage.y + self.mage.image.get_height() - self.chest.y) <= 230:
                 self.chest.open()
+            if event.key == pygame.K_ESCAPE:
+                pygame.mixer_music.load('data/Arti-Fix - Cybernetic Sect.mp3')
+                pygame.mixer_music.play(0, 44.0)
+                pygame.mixer_music.set_volume(0.049)
+                self.stop = True
 
     def render(self):
         self.screen.fill(pygame.Color('#383636'))

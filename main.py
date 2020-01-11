@@ -9,6 +9,7 @@ from main_menu import MainMenuButton
 class TheCageOfMage(Game):
     def __init__(self, width, height):
         super().__init__(width, height)
+        pygame.mixer_music.stop()
         pygame.mixer_music.load('data/Arti-Fix - Cybernetic Sect.mp3')
         pygame.mixer_music.play(0, 44.0)
         pygame.mixer_music.set_volume(0.049)
