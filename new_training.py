@@ -55,8 +55,8 @@ class Training(Game):
             self.border_b.draw(self.screen)
             self.borders.draw(self.screen)
             self.chest_group.draw(self.screen)
-            self.mage_group.draw(self.screen)
             self.chair_group.draw(self.screen)
+            self.mage_group.draw(self.screen)
 
             self.mage_group.update(event, 10, self.border_b, self.borders)
             self.chest_group.update()
