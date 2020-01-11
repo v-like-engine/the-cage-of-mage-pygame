@@ -30,6 +30,8 @@ class Game:
             if event.key == pygame.K_F4:
                 self.running = False
                 self.terminate()
+        # if event.type == pygame.MOUSEMOTION:
+        #     cursor_pos = event.pos
 
     def loop(self):
         self.clock.tick(self.FPS)
