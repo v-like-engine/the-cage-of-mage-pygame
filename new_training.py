@@ -1,8 +1,8 @@
 import pygame
 
-from Chair import Chair
+from chair_sprite import Chair
 from background_sprites import Background, Border
-from chest import Chest
+from chest_sprite import Chest
 from hero_classes import Mage
 from main import Game
 
@@ -11,8 +11,8 @@ class Training(Game):
     def __init__(self, width, height):
         super().__init__(width, height)
         pygame.mixer_music.load('data/Kytami-Sirens.mp3')
-        pygame.mixer_music.play()
-        pygame.mixer_music.set_volume(pygame.mixer_music.get_volume() * 0.02)
+        pygame.mixer_music.play(0, 0.0)
+        pygame.mixer_music.set_volume(0.049)
         self.ticks = 0
         self.chest = None
 

@@ -7,7 +7,7 @@ from simple_sprite import SimpleSprite
 class MageMainMenu(SimpleSprite):
     def __init__(self, group, screen, x, y):
         super().__init__(group, screen, x, y)
-        self.image = load_image('mage-with-torch.png')
+        self.image = load_image('mage_with_torch.png')
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y

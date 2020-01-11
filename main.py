@@ -1,8 +1,8 @@
 import pygame
 
-from Game import Game
-from Logo import Logo
-from Mage_main_menu import MageMainMenu
+from main_class import Game
+from logo_load import Logo
+from mage_image_for_menu import MageMainMenu
 from main_menu import MainMenuButton
 
 

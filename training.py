@@ -1,5 +1,5 @@
 from background_sprites import Background, Border
-from chest import Chest
+from chest_sprite import Chest
 from hero_classes import Mage
 
 import pygame
@@ -8,6 +8,7 @@ FPS = 30
 WIDTH = 1280
 HEIGHT = 720
 pygame.init()
+print('music!!!')
 pygame.mixer_music.load('data/Kytami-Sirens.mp3')
 pygame.mixer_music.play(0, 0.0)
 pygame.mixer_music.set_volume(0.049)
