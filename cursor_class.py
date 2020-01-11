@@ -22,7 +22,6 @@ class Cursor:
         for i in range(columns):
             x = width * i
             y = 0
-            print(x, y, width, height)
             image = sheet.subsurface(x, y, width, height)
             image = pygame.transform.scale(image, size)
             self.frames.append(image)

@@ -33,7 +33,7 @@ class AnimatedSprite(pygame.sprite.Sprite):
 
 
 class Mage(AnimatedSprite):
-    def __init__(self, x, y, fps, box_group):
+    def __init__(self, x, y, fps, *box_group):
         super().__init__(load_image('mage_pictures.png'), 8, 4, x, y, 160, 240)
         self.velocity = [0, 0]
         self.direction = 0
@@ -43,7 +43,8 @@ class Mage(AnimatedSprite):
         self.v = 360 / fps
         self.g = 0
         self.up = False
-        self.box_group = box_group
+        if box_group:
+            self.box_group = box_group
         self.mask = pygame.mask.from_surface(self.image)
         self.chest = None
 
