@@ -11,7 +11,7 @@ class Training(LevelInRoom):
         self.chest = None
         self.chest_group = pygame.sprite.Group()
         self.chair_group = pygame.sprite.Group()
-        self.mage = Mage(50, 420, self.FPS, self.chest_group)
+        #self.mage = Mage(50, 420, self.FPS, self.chest_group)
 
         self.stop = False
 
