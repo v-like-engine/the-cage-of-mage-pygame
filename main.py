@@ -1,3 +1,5 @@
+import sys
+
 import pygame
 
 from main_class import Game
