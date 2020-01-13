@@ -2,6 +2,7 @@ from os import path
 
 import pygame
 
+from level2 import Level2
 from levels_in_room import NewLevel
 from new_training import Training
 
@@ -50,7 +51,7 @@ class MainMenuButton(pygame.sprite.Sprite):
                     Training(1280, 720)
                     return
                 elif self.text == 'New game':
-                    NewLevel(1280, 720)
+                    Level2(1280, 720)
                     return
         else:
             self.image = self.stock
