@@ -34,29 +34,32 @@ class AnimatedSprite(pygame.sprite.Sprite):
 
 class Mage(AnimatedSprite):
     def __init__(self, x, y, fps, *box_group):
-        super().__init__(load_image('mage_pictures.png'), 8, 4, x, y, 160, 240)
+        self.height = 240
+        self.width = 160
+        super().__init__(load_image('mage_pictures.png'), 8, 4, x, y, self.width, self.height)
         self.velocity = [0, 0]
         self.direction = 0
         self.game_fps = fps
         self.frame_fps = 40 / fps
         self.until_frame = 0
-        self.v = 360 / fps
-        self.g = 0
+        self.v = 240 / fps
+        self.mass_defined_v = 180 / fps
+        self.g = 0.1
         self.up = False
         if box_group:
             self.box_group = box_group
         self.mask = pygame.mask.from_surface(self.image)
         self.chest = None
 
-    def update(self, event=None, v=0, *borders):
-        self.change_coords(2, v, self.g)
-        if not pygame.sprite.spritecollideany(self, borders[0]):
-            self.velocity = self.velocity[0], 1
-            self.g += 0.2
+    def update(self, event=None, *borders):
+        dno = borders[0].sprites()[0].coords[1]
+        self.change_coords(2, dno)
+        if not pygame.sprite.spritecollideany(self, borders[0]) and self.up:
+            self.velocity = self.velocity[0], self.velocity[1] + self.g
         else:
-            self.change_coords(2, -v, self.g)
+            self.change_coords(2, dno)
             self.velocity = self.velocity[0], 0
-            self.g = 1
+            self.up = False
         if event.type == pygame.KEYDOWN:
             self.direction = -1
             if event.type == pygame.KEYDOWN and pygame.key.get_mods() & pygame.KMOD_LSHIFT:
@@ -81,11 +84,12 @@ class Mage(AnimatedSprite):
                 self.direction = 0
                 self.velocity = 1, self.velocity[1]
             if event.key == pygame.K_UP and self.velocity[1] == 0 and not self.up:
+                self.up = True
                 self.v = 240 / self.game_fps
                 self.frame_fps = 40 / self.game_fps
                 self.direction = -1
-                self.velocity = self.velocity[0], -4
-                self.up = True
+                self.velocity = self.velocity[0], -5
+                print('up', self.rect.y)
             if self.direction != -1:
                 if self.until_frame > 0.98:
                     self.cur_frame = (self.cur_frame + 1) % (len(self.frames) // 2)
@@ -94,28 +98,30 @@ class Mage(AnimatedSprite):
                     self.until_frame += self.frame_fps
                 frame = self.direction * 16 + self.cur_frame
                 self.image = self.frames[frame]
-                self.change_coords(0)
+                self.change_coords(1)
                 if self.chest:
                     if frame in [15, 31] or pygame.sprite.spritecollideany(self, borders[1]) or \
                             pygame.sprite.collide_mask(self, self.chest):
                         self.velocity = -self.velocity[0], self.velocity[1]
-                        self.change_coords(0)
+                        self.change_coords(1)
                 else:
                     if frame in [15, 31] or pygame.sprite.spritecollideany(self, borders[1]):
                         self.velocity = -self.velocity[0], self.velocity[1]
-                        self.change_coords(0)
+                        self.change_coords(1)
             # self.move(self.x, self.y + 10 / FPS)
-        if event.type == pygame.KEYUP:
-            self.up = False
 
-    def change_coords(self, x_or_y, *g):
-        if x_or_y == 0:
+    def change_coords(self, x_or_y, *limits):
+        if x_or_y in (0, 1):
             self.rect.x += self.v * self.velocity[0]
-            self.rect.y += self.v * self.velocity[1]
-        elif x_or_y == 1:
-            self.rect.x += self.v * self.velocity[0]
-        else:
-            self.rect.y += self.v * self.velocity[1] * g[0]
+        elif x_or_y in (0, 2):
+            if limits:
+                if limits[0] >= self.rect.y - self.height + self.mass_defined_v * self.velocity[1]:
+                    self.rect.y += int(self.mass_defined_v * self.velocity[1])
+                else:
+                    print('=', limits[0] - self.height)
+                    self.rect.y = limits[0] - self.height
+            else:
+                self.rect.y += int(self.mass_defined_v * self.velocity[1])
         self.x = self.rect.x
         self.y = self.rect.y
 

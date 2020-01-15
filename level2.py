@@ -29,7 +29,7 @@ class Level2(LevelInRoom):
             self.chest_group.draw(self.screen)
             self.mage_group.draw(self.screen)
 
-            self.mage_group.update(event, 10, self.border_b, self.borders)
+            self.mage_group.update(event, self.border_b, self.borders)
             self.chest_group.update()
 
             pygame.display.flip()
