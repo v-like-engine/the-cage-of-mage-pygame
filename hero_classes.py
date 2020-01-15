@@ -44,7 +44,7 @@ class Mage(AnimatedSprite):
         self.until_frame = 0
         self.v = 240 / fps
         self.mass_defined_v = 180 / fps
-        self.g = 0.1
+        self.g = 0.3
         self.up = False
         if box_group:
             self.box_group = box_group
@@ -115,11 +115,10 @@ class Mage(AnimatedSprite):
             self.rect.x += self.v * self.velocity[0]
         elif x_or_y in (0, 2):
             if limits:
-                if limits[0] >= self.rect.y - self.height + self.mass_defined_v * self.velocity[1]:
+                if limits[0] >= self.rect.y + self.height + self.mass_defined_v * self.velocity[1]:
                     self.rect.y += int(self.mass_defined_v * self.velocity[1])
                 else:
-                    print('=', limits[0] - self.height)
-                    self.rect.y = limits[0] - self.height
+                    self.rect.y = limits[0] - self.height + 2
             else:
                 self.rect.y += int(self.mass_defined_v * self.velocity[1])
         self.x = self.rect.x
