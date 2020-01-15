@@ -1,12 +1,19 @@
 import pygame
 
 from chest_sprite import Chest
+from hero_classes import Mage
 from level_mask import LevelInRoom
+from load_image import load_image
+from platform_load import Platform
 
 
 class Level2(LevelInRoom):
     def __init__(self, width, height):
         super().__init__(width, height)
+        self.platforms_list = []
+        self.platform = Platform(self.platforms, load_image('platforms/double_brown.png'), self.screen, 400, 600)
+        self.platforms_list.append(self.platform)
+        self.all_sprites.add(self.platform)
         self.chest_group = pygame.sprite.Group()
         self.chest = Chest(self.chest_group, self.screen, 1050, 450)
         self.chest.image = pygame.transform.flip(self.chest.image, True, False)
@@ -28,9 +35,11 @@ class Level2(LevelInRoom):
             self.borders.draw(self.screen)
             self.chest_group.draw(self.screen)
             self.mage_group.draw(self.screen)
+            self.platforms.draw(self.screen)
 
             self.mage_group.update(event, 10, self.border_b, self.borders)
             self.chest_group.update()
+            self.platforms.update()
 
             pygame.display.flip()
             self.clock.tick(self.FPS)

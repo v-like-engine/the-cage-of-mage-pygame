@@ -33,7 +33,7 @@ class AnimatedSprite(pygame.sprite.Sprite):
 
 
 class Mage(AnimatedSprite):
-    def __init__(self, x, y, fps, *box_group):
+    def __init__(self, x, y, fps, platforms, *box_group):
         super().__init__(load_image('mage_pictures.png'), 8, 4, x, y, 160, 240)
         self.velocity = [0, 0]
         self.direction = 0
@@ -43,6 +43,7 @@ class Mage(AnimatedSprite):
         self.v = 360 / fps
         self.g = 0
         self.up = False
+        self.platforms = platforms
         if box_group:
             self.box_group = box_group
         self.mask = pygame.mask.from_surface(self.image)
@@ -50,7 +51,8 @@ class Mage(AnimatedSprite):
 
     def update(self, event=None, v=0, *borders):
         self.change_coords(2, v, self.g)
-        if not pygame.sprite.spritecollideany(self, borders[0]):
+        if not pygame.sprite.spritecollideany(self, borders[0]) and \
+                not pygame.sprite.spritecollideany(self, self.platforms):
             self.velocity = self.velocity[0], 1
             self.g += 0.2
         else:
@@ -100,10 +102,22 @@ class Mage(AnimatedSprite):
                             pygame.sprite.collide_mask(self, self.chest):
                         self.velocity = -self.velocity[0], self.velocity[1]
                         self.change_coords(0)
+                    else:
+                        for platform in self.platforms:
+                            if pygame.sprite.collide_mask(self, platform):
+                                self.velocity = -self.velocity[0], self.velocity[1]
+                                self.change_coords(0)
+                                break
                 else:
                     if frame in [15, 31] or pygame.sprite.spritecollideany(self, borders[1]):
                         self.velocity = -self.velocity[0], self.velocity[1]
                         self.change_coords(0)
+                    else:
+                        for platform in self.platforms:
+                            if pygame.sprite.collide_mask(self, platform):
+                                self.velocity = -self.velocity[0], self.velocity[1]
+                                self.change_coords(0)
+                                break
             # self.move(self.x, self.y + 10 / FPS)
         if event.type == pygame.KEYUP:
             self.up = False

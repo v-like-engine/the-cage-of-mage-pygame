@@ -9,3 +9,4 @@ class Platform(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
+        self.rect = pygame.Rect(self.x, self.y - 5, self.image.get_width(), self.image.get_height())

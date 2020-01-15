@@ -16,6 +16,7 @@ class LevelInRoom(Game):
         self.mage_group = pygame.sprite.Group()
         self.border_b = pygame.sprite.Group()
         self.borders = pygame.sprite.Group()
+        self.platforms = pygame.sprite.Group()
 
         training_background = Background('training.jpg', 0, -30)
         training_background.add(self.all_sprites)
@@ -25,7 +26,7 @@ class LevelInRoom(Game):
         border_right = Border(32, 720, 1248, 0)
         border_left.add(self.borders)
         border_right.add(self.borders)
-        self.mage = Mage(50, 420, self.FPS)
+        self.mage = Mage(50, 420, self.FPS, self.platforms)
         self.mage.add(self.all_sprites)
         self.mage.add(self.mage_group)
 
