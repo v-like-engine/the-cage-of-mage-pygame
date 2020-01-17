@@ -55,6 +55,12 @@ class Mage(AnimatedSprite):
         self.mask = pygame.mask.from_surface(self.image)
         self.chest = None
 
+    def velocity_change(self, v, r_v, j_v):
+        self.walk_velocity = v / self.game_fps
+        self.current_horisontal_velocity = self.walk_velocity
+        self.vertical_velocity = j_v / self.game_fps
+        self.run_velocity = r_v / self.game_fps
+
     def update(self, pressed=None, *borders):
         dno = borders[0].sprites()[0].coords[1]
         self.change_coords(2, dno)

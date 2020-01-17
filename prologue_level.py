@@ -60,6 +60,5 @@ class PrologueLevel(LevelMask):
             self.camera_update(240 / self.FPS)
         elif pressed[pygame.K_RIGHT]:
             self.camera_update(-240 / self.FPS)
-
         self.mage.update(pressed, self.border_b, self.borders)
 

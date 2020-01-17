@@ -22,3 +22,7 @@ class Border(pygame.sprite.Sprite):
         self.coords = move_x, move_y, move_x + x, move_y + y
         pygame.draw.rect(self.image, pygame.Color('black'), (move_x, move_y, move_x + x, move_y + y))
         self.image.set_alpha(0)
+
+    def move_frame(self, x_diff, ydiff):
+        self.rect.x += x_diff
+        self.rect.y += ydiff
