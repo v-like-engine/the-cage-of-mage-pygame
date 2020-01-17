@@ -11,11 +11,11 @@ class Level2(LevelInRoom):
     def __init__(self, width, height):
         super().__init__(width, height)
         self.platforms_list = []
-        self.platform = Platform(self.platforms, load_image('platforms/double_brown.png'), self.screen, 400, 600)
+        self.platform = Platform(self.platforms, load_image('platforms/double_brown.png'), self.screen, 400, 300)
         self.platforms_list.append(self.platform)
         self.all_sprites.add(self.platform)
         self.chest_group = pygame.sprite.Group()
-        self.chest = Chest(self.chest_group, self.screen, 1050, 450)
+        self.chest = Chest(self.chest_group, self.screen, 1050, 480)
         self.chest.image = pygame.transform.flip(self.chest.image, True, False)
         self.chest.opened_image = pygame.transform.flip(self.chest.opened_image, True, False)
         self.all_sprites.add(self.chest)

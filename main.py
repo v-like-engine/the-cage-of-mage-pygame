@@ -23,7 +23,6 @@ class TheCageOfMage(Game):
         self.logo = Logo(self.logo_group, self.screen, width // 50, -20)
         self.mage_main_menu_group = pygame.sprite.Group()
         self.mage_main_menu = MageMainMenu(self.mage_main_menu_group, self.screen, width // 12, self.height // 4)
-        print('не утка')
         self.execute()
 
     def draw_buttons(self):
@@ -69,4 +68,3 @@ class TheCageOfMage(Game):
 
     def loop(self):
         super().loop()
-        # Здесь движение
