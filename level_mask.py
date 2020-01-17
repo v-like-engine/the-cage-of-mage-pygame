@@ -26,9 +26,6 @@ class LevelInRoom(Game):
         border_right = Border(32, 720, 1248, 0)
         border_left.add(self.borders)
         border_right.add(self.borders)
-        self.mage = Mage(50, 456, 240, 360, 180, self.FPS, self.platforms)
-        self.mage.add(self.all_sprites)
-        self.mage.add(self.mage_group)
 
         self.stop = False
         self.ticks = 0

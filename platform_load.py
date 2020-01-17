@@ -6,6 +6,8 @@ class Platform(pygame.sprite.Sprite):
         self.x = x
         self.y = y
         self.image = image
+        self.w = self.image.get_width()
+        self.h = self.image.get_height()
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
