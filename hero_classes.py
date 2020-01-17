@@ -100,7 +100,7 @@ class Mage(AnimatedSprite):
             self.image = self.frames[frame]
             self.change_coords(1)
             if self.chest:
-                if frame in [15, 31] or pygame.sprite.spritecollideany(self, borders[1]) or \
+                if pygame.sprite.spritecollideany(self, borders[1]) or \
                         pygame.sprite.collide_mask(self, self.chest):
                     self.movement_coefficients = -self.movement_coefficients[0], self.movement_coefficients[1]
                     self.change_coords(1)
@@ -112,7 +112,7 @@ class Mage(AnimatedSprite):
                             self.change_coords(0)
                             break
             else:
-                if frame in [15, 31] or pygame.sprite.spritecollideany(self, borders[1]):
+                if pygame.sprite.spritecollideany(self, borders[1]):
                     self.movement_coefficients = -self.movement_coefficients[0], self.movement_coefficients[1]
                     self.change_coords(1)
                 else:
