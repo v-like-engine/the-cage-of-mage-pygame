@@ -54,3 +54,6 @@ class Level2(LevelInRoom):
                     abs(self.mage.x + self.mage.image.get_width() - self.chest.x) <= 230 and \
                     abs(self.mage.y + self.mage.image.get_height() - self.chest.y) <= 230:
                 self.chest.open()
+            if event.key == pygame.K_r:
+                New = Level2(self.width, self.height)
+                self.stop = True
