@@ -7,11 +7,11 @@ from level_mask import LevelMask
 
 class Training(LevelMask):
     def __init__(self, width, height):
-        super().__init__(width, height, 'training.jpg')
         self.chest = None
         self.chest_group = pygame.sprite.Group()
+        super().__init__(width, height, (50, 456, 240, 360, 240), self.chest_group,
+                         'training.jpg')
         self.chair_group = pygame.sprite.Group()
-        #self.mage = Mage(50, 420, self.FPS, self.chest_group)
 
         self.stop = False
 

@@ -6,7 +6,7 @@ from main_class import Game
 
 
 class LevelMask(Game):
-    def __init__(self, width, height, background_file):
+    def __init__(self, width, height, mage_prefs, chests, background_file, *camera_frames):
         super().__init__(width, height)
         pygame.mixer_music.load('data/Kytami-Sirens.mp3')
         pygame.mixer_music.play(100, 0.0)
@@ -17,12 +17,22 @@ class LevelMask(Game):
         self.border_b = pygame.sprite.Group()
         self.borders = pygame.sprite.Group()
         self.platforms = pygame.sprite.Group()
-        self.mage = Mage(50, 456, 240, 360, 240, self.FPS, self.platforms)
+        self.FPS = self.FPS
+        self.mage = Mage(*mage_prefs, self.FPS, self.platforms, chests)
         self.mage.add(self.all_sprites)
         self.mage.add(self.mage_group)
 
         training_background = Background(background_file, 0, 0)
         training_background.add(self.all_sprites)
+        if camera_frames:
+            self.bg_frames = [training_background]
+            x_frame = 0
+            for el in camera_frames:
+                frame = Background(el, x_frame, 0)
+                frame_width = -frame.image.get_size()[0]
+                frame.move_frame(frame_width, 0)
+                x_frame += frame_width
+                self.bg_frames.append(frame)
         border_bottom = Border(1280, 64, 0, 692)
         border_bottom.add(self.border_b)
         border_left = Border(32, 720, 0, 0)
@@ -32,8 +42,6 @@ class LevelMask(Game):
 
         self.stop = False
         self.ticks = 0
-
-        pygame.key.set_repeat(10)
 
     # def execute(self):
     #     while self.running:

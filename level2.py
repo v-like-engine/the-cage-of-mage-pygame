@@ -8,7 +8,7 @@ from platform_load import Platform
 
 class Level2(LevelMask):
     def __init__(self, width, height):
-        super().__init__(width, height, 'training.jpg')
+        super().__init__(width, height, (50, 456, 240, 360, 240), False, 'training.jpg')
         self.platforms_list = []
         self.platform = Platform(self.platforms, load_image('platforms/double_brown.png'), self.screen, 400, 600)
         self.platforms_list.append(self.platform)
@@ -60,4 +60,5 @@ class Level2(LevelMask):
 
     def check_movement(self):
         pressed = pygame.key.get_pressed()
+
         self.mage.update(pressed, self.border_b, self.borders)

@@ -33,7 +33,7 @@ class AnimatedSprite(pygame.sprite.Sprite):
 
 
 class Mage(AnimatedSprite):
-    def __init__(self, x, y, hor_v, run_v, vert_v, fps, platforms, *box_group):
+    def __init__(self, x, y, hor_v, run_v, vert_v, fps, platforms, cam=False, *box_group):
         self.height = 240
         self.width = 160
         super().__init__(load_image('mage_pictures.png'), 8, 4, x, y, self.width, self.height)
@@ -47,6 +47,7 @@ class Mage(AnimatedSprite):
         self.vertical_velocity = vert_v / fps
         self.run_velocity = run_v / fps
         self.g = 0.2
+        self.cam = cam
         self.in_jump = False
         self.platforms = platforms
         if box_group:

@@ -9,6 +9,10 @@ class Background(pygame.sprite.Sprite):
         self.image = load_image(image_name)
         self.rect = self.image.get_rect().move(move_x, move_y)
 
+    def move_frame(self, x_diff, ydiff):
+        self.rect.x += x_diff
+        self.rect.y += ydiff
+
 
 class Border(pygame.sprite.Sprite):
     def __init__(self, x, y, move_x, move_y):
