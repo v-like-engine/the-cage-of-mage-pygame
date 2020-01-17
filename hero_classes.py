@@ -46,7 +46,7 @@ class Mage(AnimatedSprite):
         self.current_horisontal_velocity = self.walk_velocity
         self.vertical_velocity = vert_v / fps
         self.run_velocity = run_v / fps
-        self.g = 0.3
+        self.g = 0.2
         self.in_jump = False
         self.platforms = platforms
         if box_group:
@@ -59,7 +59,6 @@ class Mage(AnimatedSprite):
         self.change_coords(2, dno)
         if not pygame.sprite.spritecollideany(self, borders[0]) and self.in_jump:
             self.movement_coefficients = self.movement_coefficients[0], self.movement_coefficients[1] + self.g
-            print(self.movement_coefficients)
         else:
             self.movement_coefficients = self.movement_coefficients[0], 0
             self.in_jump = False

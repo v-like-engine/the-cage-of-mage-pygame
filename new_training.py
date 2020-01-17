@@ -35,6 +35,7 @@ class Training(LevelInRoom):
             self.mage_group.draw(self.screen)
 
             self.check_movement()
+            self.check_movement()
             self.chest_group.update()
             self.chair_group.update()
 
