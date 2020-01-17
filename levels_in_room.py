@@ -1,9 +1,9 @@
 import pygame
 
-from level_mask import LevelInRoom
+from level_mask import LevelMask
 
 
-class NewLevel(LevelInRoom):
+class NewLevel(LevelMask):
     def __init__(self, width, height):
         super().__init__(width, height)
         print('я утка')

@@ -1,15 +1,14 @@
 import pygame
 
 from chest_sprite import Chest
-from hero_classes import Mage
-from level_mask import LevelInRoom
+from level_mask import LevelMask
 from load_image import load_image
 from platform_load import Platform
 
 
-class Level2(LevelInRoom):
+class Level2(LevelMask):
     def __init__(self, width, height):
-        super().__init__(width, height)
+        super().__init__(width, height, 'training.jpg')
         self.platforms_list = []
         self.platform = Platform(self.platforms, load_image('platforms/double_brown.png'), self.screen, 400, 600)
         self.platforms_list.append(self.platform)

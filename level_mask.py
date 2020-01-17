@@ -5,8 +5,8 @@ from hero_classes import Mage
 from main_class import Game
 
 
-class LevelInRoom(Game):
-    def __init__(self, width, height):
+class LevelMask(Game):
+    def __init__(self, width, height, background_file):
         super().__init__(width, height)
         pygame.mixer_music.load('data/Kytami-Sirens.mp3')
         pygame.mixer_music.play(100, 0.0)
@@ -21,7 +21,7 @@ class LevelInRoom(Game):
         self.mage.add(self.all_sprites)
         self.mage.add(self.mage_group)
 
-        training_background = Background('training.jpg', 0, 0)
+        training_background = Background(background_file, 0, 0)
         training_background.add(self.all_sprites)
         border_bottom = Border(1280, 64, 0, 692)
         border_bottom.add(self.border_b)
