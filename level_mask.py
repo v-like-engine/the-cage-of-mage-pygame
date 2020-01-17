@@ -18,6 +18,7 @@ class LevelMask(Game):
         self.borders = pygame.sprite.Group()
         self.platforms = pygame.sprite.Group()
         self.FPS = self.FPS
+        self.screen = self.screen
         self.mage = Mage(*mage_prefs, self.FPS, self.platforms, chests)
         self.mage.add(self.all_sprites)
         self.mage.add(self.mage_group)

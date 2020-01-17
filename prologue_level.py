@@ -18,6 +18,7 @@ class PrologueLevel(LevelMask):
             if self.stop:
                 return
             self.loop()
+            self.screen.fill(pygame.Color('#383636'))
 
             self.all_sprites.draw(self.screen)
             self.border_b.draw(self.screen)
@@ -37,7 +38,7 @@ class PrologueLevel(LevelMask):
 
     def camera_update(self, x):
         if self.bg_frames[-1].rect.x + x > 0:
-            x = 0 - self.bg_frames.rect.x
+            x = 0 - self.bg_frames[-1].rect.x
         for el in self.bg_frames:
             el.move_frame(x, 0)
         self.cam_coord -= x
