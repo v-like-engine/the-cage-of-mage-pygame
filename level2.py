@@ -37,7 +37,7 @@ class Level2(LevelInRoom):
             self.mage_group.draw(self.screen)
             self.platforms.draw(self.screen)
 
-            self.mage_group.update(event, self.border_b, self.borders)
+            self.check_movement()
             self.chest_group.update()
             self.platforms.update()
 
@@ -57,3 +57,7 @@ class Level2(LevelInRoom):
             if event.key == pygame.K_r:
                 New = Level2(self.width, self.height)
                 self.stop = True
+
+    def check_movement(self):
+        pressed = pygame.key.get_pressed()
+        self.mage.update(pressed, self.border_b, self.borders)

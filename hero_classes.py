@@ -52,7 +52,7 @@ class Mage(AnimatedSprite):
         self.mask = pygame.mask.from_surface(self.image)
         self.chest = None
 
-    def update(self, event=None, *borders):
+    def update(self, pressed=None, *borders):
         dno = borders[0].sprites()[0].coords[1]
         self.change_coords(2, dno)
         if not pygame.sprite.spritecollideany(self, borders[0]) and self.up:
@@ -61,67 +61,66 @@ class Mage(AnimatedSprite):
             self.change_coords(2, dno)
             self.velocity = self.velocity[0], 0
             self.up = False
-        if event.type == pygame.KEYDOWN:
-            self.direction = -1
-            if event.type == pygame.KEYDOWN and pygame.key.get_mods() & pygame.KMOD_LSHIFT:
-                if event.key == pygame.K_LEFT:
-                    self.v = 360 / self.game_fps
-                    self.frame_fps = 60 / self.game_fps
-                    self.direction = 1
-                    self.velocity = -1, self.velocity[1]
-                if event.key == pygame.K_RIGHT:
-                    self.v = 360 / self.game_fps
-                    self.frame_fps = 60 / self.game_fps
-                    self.direction = 0
-                    self.velocity = 1, self.velocity[1]
-            elif event.key == pygame.K_LEFT:
-                self.v = 240 / self.game_fps
-                self.frame_fps = 40 / self.game_fps
+        self.direction = -1
+        if pressed[pygame.K_LSHIFT]:
+            if pressed[pygame.K_LEFT]:
+                self.v = 360 / self.game_fps
+                self.frame_fps = 60 / self.game_fps
                 self.direction = 1
                 self.velocity = -1, self.velocity[1]
-            elif event.key == pygame.K_RIGHT:
-                self.v = 240 / self.game_fps
-                self.frame_fps = 40 / self.game_fps
+            if pressed[pygame.K_RIGHT]:
+                self.v = 360 / self.game_fps
+                self.frame_fps = 60 / self.game_fps
                 self.direction = 0
                 self.velocity = 1, self.velocity[1]
-            if event.key == pygame.K_UP and self.velocity[1] == 0 and not self.up:
-                self.up = True
-                self.v = 240 / self.game_fps
-                self.frame_fps = 40 / self.game_fps
-                self.direction = -1
-                self.velocity = self.velocity[0], -5
-                print('up', self.rect.y)
-            if self.direction != -1:
-                if self.until_frame > 0.98:
-                    self.cur_frame = (self.cur_frame + 1) % (len(self.frames) // 2)
-                    self.until_frame = 0
+        elif pressed[pygame.K_LEFT]:
+            self.v = 240 / self.game_fps
+            self.frame_fps = 40 / self.game_fps
+            self.direction = 1
+            self.velocity = -1, self.velocity[1]
+        elif pressed[pygame.K_RIGHT]:
+            self.v = 240 / self.game_fps
+            self.frame_fps = 40 / self.game_fps
+            self.direction = 0
+            self.velocity = 1, self.velocity[1]
+        if pressed[pygame.K_UP] and self.velocity[1] == 0 and not self.up:
+            self.up = True
+            self.v = 240 / self.game_fps
+            self.frame_fps = 40 / self.game_fps
+            self.direction = -1
+            self.velocity = self.velocity[0], -5
+            print('up', self.rect.y)
+        if self.direction != -1:
+            if self.until_frame > 0.98:
+                self.cur_frame = (self.cur_frame + 1) % (len(self.frames) // 2)
+                self.until_frame = 0
+            else:
+                self.until_frame += self.frame_fps
+            frame = self.direction * 16 + self.cur_frame
+            self.image = self.frames[frame]
+            self.change_coords(1)
+            if self.chest:
+                if frame in [15, 31] or pygame.sprite.spritecollideany(self, borders[1]) or \
+                        pygame.sprite.collide_mask(self, self.chest):
+                    self.velocity = -self.velocity[0], self.velocity[1]
+                    self.change_coords(1)
+                    self.change_coords(0)
                 else:
-                    self.until_frame += self.frame_fps
-                frame = self.direction * 16 + self.cur_frame
-                self.image = self.frames[frame]
-                self.change_coords(1)
-                if self.chest:
-                    if frame in [15, 31] or pygame.sprite.spritecollideany(self, borders[1]) or \
-                            pygame.sprite.collide_mask(self, self.chest):
-                        self.velocity = -self.velocity[0], self.velocity[1]
-                        self.change_coords(1)
-                        self.change_coords(0)
-                    else:
-                        for platform in self.platforms:
-                            if pygame.sprite.collide_mask(self, platform):
-                                self.velocity = -self.velocity[0], self.velocity[1]
-                                self.change_coords(0)
-                                break
+                    for platform in self.platforms:
+                        if pygame.sprite.collide_mask(self, platform):
+                            self.velocity = -self.velocity[0], self.velocity[1]
+                            self.change_coords(0)
+                            break
+            else:
+                if frame in [15, 31] or pygame.sprite.spritecollideany(self, borders[1]):
+                    self.velocity = -self.velocity[0], self.velocity[1]
+                    self.change_coords(1)
                 else:
-                    if frame in [15, 31] or pygame.sprite.spritecollideany(self, borders[1]):
-                        self.velocity = -self.velocity[0], self.velocity[1]
-                        self.change_coords(1)
-                    else:
-                        for platform in self.platforms:
-                            if pygame.sprite.collide_mask(self, platform):
-                                self.velocity = -self.velocity[0], self.velocity[1]
-                                self.change_coords(0)
-                                break
+                    for platform in self.platforms:
+                        if pygame.sprite.collide_mask(self, platform):
+                            self.velocity = -self.velocity[0], self.velocity[1]
+                            self.change_coords(0)
+                            break
             # self.move(self.x, self.y + 10 / FPS)
 
     def change_coords(self, x_or_y, *limits):

@@ -34,7 +34,7 @@ class Training(LevelInRoom):
             self.chair_group.draw(self.screen)
             self.mage_group.draw(self.screen)
 
-            self.mage_group.update(event, self.border_b, self.borders)
+            self.check_movement()
             self.chest_group.update()
             self.chair_group.update()
 
@@ -46,15 +46,15 @@ class Training(LevelInRoom):
 
     def handle_event(self, event):
         super().handle_event(event)
-        if event.type == pygame.KEYDOWN:
-            self.mage.update(event, self.border_b, self.borders)
+        # if event.type == pygame.KEYDOWN:
+        #     self.mage.update(event, self.border_b, self.borders)
         if event.type == pygame.MOUSEBUTTONDOWN:
             self.chest = Chest(self.chest_group, self.screen, *event.pos)
             self.chest_group.add(self.chest)
             self.all_sprites.add(self.chest)
             self.mage.add_chest(self.chest)
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_o and self.chest and \
+            if event.key == pygame.K_e and self.chest and \
                     abs(self.mage.x + self.mage.image.get_width() - self.chest.x) <= 230 and \
                     abs(self.mage.y + self.mage.image.get_height() - self.chest.y) <= 230:
                 self.chest.open()
@@ -63,3 +63,7 @@ class Training(LevelInRoom):
                 pygame.mixer_music.play(0, 44.0)
                 pygame.mixer_music.set_volume(0.049)
                 self.stop = True
+
+    def check_movement(self):
+        pressed = pygame.key.get_pressed()
+        self.mage.update(pressed, self.border_b, self.borders)

@@ -58,11 +58,14 @@ class LevelInRoom(Game):
 
     def handle_event(self, event):
         super().handle_event(event)
-        if event.type == pygame.KEYDOWN:
-            self.mage.update(event, self.border_b, self.borders)
+        self.check_movement()
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 pygame.mixer_music.load('data/Arti-Fix - Cybernetic Sect.mp3')
                 pygame.mixer_music.play(0, 44.0)
                 pygame.mixer_music.set_volume(0.049)
                 self.stop = True
+
+    def check_movement(self):
+        pressed = pygame.key.get_pressed()
+        self.mage.update(pressed, self.border_b, self.borders)
