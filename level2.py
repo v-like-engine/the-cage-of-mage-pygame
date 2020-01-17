@@ -13,9 +13,6 @@ class Level2(LevelInRoom):
         self.platforms_list = []
         self.platform = Platform(self.platforms, load_image('platforms/double_brown.png'), self.screen, 400, 600)
         self.platforms_list.append(self.platform)
-        self.mage = Mage(50, 456, 240, 360, 480, self.FPS, self.platforms_list)
-        self.mage.add(self.all_sprites)
-        self.mage.add(self.mage_group)
         self.all_sprites.add(self.platform)
         self.chest_group = pygame.sprite.Group()
         self.chest = Chest(self.chest_group, self.screen, 1050, 480)
