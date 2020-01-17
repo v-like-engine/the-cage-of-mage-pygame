@@ -57,7 +57,8 @@ class Mage(AnimatedSprite):
     def update(self, pressed=None, *borders):
         dno = borders[0].sprites()[0].coords[1]
         self.change_coords(2, dno)
-        if not pygame.sprite.spritecollideany(self, borders[0]) and self.in_jump:
+        if not pygame.sprite.spritecollideany(self, borders[0]) and self.in_jump and \
+                not pygame.sprite.spritecollideany(self, self.platforms):
             self.movement_coefficients = self.movement_coefficients[0], self.movement_coefficients[1] + self.g
         else:
             self.movement_coefficients = self.movement_coefficients[0], 0
