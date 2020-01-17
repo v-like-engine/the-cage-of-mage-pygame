@@ -16,7 +16,7 @@ class Training(LevelInRoom):
         self.stop = False
 
         # decorations
-        self.chair = Chair(self.chair_group, self.screen, 1080, 540)
+        self.chair = Chair(self.chair_group, self.screen, 1080, 580)
         self.execute()
 
     def execute(self):
@@ -34,7 +34,7 @@ class Training(LevelInRoom):
             self.chair_group.draw(self.screen)
             self.mage_group.draw(self.screen)
 
-            self.mage_group.update(event, 10, self.border_b, self.borders)
+            self.mage_group.update(event, self.border_b, self.borders)
             self.chest_group.update()
             self.chair_group.update()
 
@@ -47,7 +47,7 @@ class Training(LevelInRoom):
     def handle_event(self, event):
         super().handle_event(event)
         if event.type == pygame.KEYDOWN:
-            self.mage.update(event, 10, self.border_b, self.borders)
+            self.mage.update(event, self.border_b, self.borders)
         if event.type == pygame.MOUSEBUTTONDOWN:
             self.chest = Chest(self.chest_group, self.screen, *event.pos)
             self.chest_group.add(self.chest)

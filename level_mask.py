@@ -18,15 +18,15 @@ class LevelInRoom(Game):
         self.borders = pygame.sprite.Group()
         self.platforms = pygame.sprite.Group()
 
-        training_background = Background('training.jpg', 0, -30)
+        training_background = Background('training.jpg', 0, 0)
         training_background.add(self.all_sprites)
-        border_bottom = Border(1280, 64, 0, 656)
+        border_bottom = Border(1280, 64, 0, 692)
         border_bottom.add(self.border_b)
         border_left = Border(32, 720, 0, 0)
         border_right = Border(32, 720, 1248, 0)
         border_left.add(self.borders)
         border_right.add(self.borders)
-        self.mage = Mage(50, 420, self.FPS, self.platforms)
+        self.mage = Mage(50, 456, self.FPS, self.platforms)
         self.mage.add(self.all_sprites)
         self.mage.add(self.mage_group)
 
@@ -59,7 +59,7 @@ class LevelInRoom(Game):
     def handle_event(self, event):
         super().handle_event(event)
         if event.type == pygame.KEYDOWN:
-            self.mage.update(event, 10, self.border_b, self.borders)
+            self.mage.update(event, self.border_b, self.borders)
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 pygame.mixer_music.load('data/Arti-Fix - Cybernetic Sect.mp3')
