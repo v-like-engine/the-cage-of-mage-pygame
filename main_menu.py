@@ -3,6 +3,7 @@ from os import path
 import pygame
 
 from level2 import Level2
+from level3 import Level3
 from levels_in_room import NewLevel
 from new_training import Training
 from prologue_level import PrologueLevel
@@ -52,7 +53,11 @@ class MainMenuButton(pygame.sprite.Sprite):
                     Training(1280, 720)
                     return
                 elif self.text == 'New game':
-                    Level2(1280, 720)
+                    with open('level_now.txt') as file:
+                        text = file.read()
+                    print(text)
+                    level = eval(text)
+                    level(1280, 720)
                     return
                 elif self.text == 'Continue':
                     PrologueLevel(1280, 720)

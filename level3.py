@@ -10,15 +10,9 @@ class Level3(LevelMask):
     def __init__(self, width, height):
         super().__init__(width, height, (50, 456, 240, 360, 240), False, 'training.jpg')
         self.platforms_list = []
-        self.platform = Platform(self.platforms, load_image('platforms/double_brown.png'), self.screen, 400, 600)
+        self.platform = Platform(self.platforms, load_image('platforms/double_brown.png'), self.screen, 400, 500)
         self.platforms_list.append(self.platform)
         self.all_sprites.add(self.platform)
-        self.chest_group = pygame.sprite.Group()
-        self.chest = Chest(self.chest_group, self.screen, 1050, 480)
-        self.chest.image = pygame.transform.flip(self.chest.image, True, False)
-        self.chest.opened_image = pygame.transform.flip(self.chest.opened_image, True, False)
-        self.all_sprites.add(self.chest)
-        self.mage.add_chest(self.chest)
         self.execute()
 
     def execute(self):
@@ -32,13 +26,11 @@ class Level3(LevelMask):
             self.all_sprites.draw(self.screen)
             self.border_b.draw(self.screen)
             self.borders.draw(self.screen)
-            self.chest_group.draw(self.screen)
             self.mage_group.draw(self.screen)
             self.platforms.draw(self.screen)
 
             self.check_movement()
             self.check_movement()
-            self.chest_group.update()
             self.platforms.update()
 
             pygame.display.flip()
@@ -50,10 +42,6 @@ class Level3(LevelMask):
     def handle_event(self, event):
         super().handle_event(event)
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_o and \
-                    abs(self.mage.x + self.mage.image.get_width() - self.chest.x) <= 230 and \
-                    abs(self.mage.y + self.mage.image.get_height() - self.chest.y) <= 230:
-                self.chest.open()
             if event.key == pygame.K_r:
                 New = Level3(self.width, self.height)
                 self.stop = True
