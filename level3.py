@@ -1,32 +1,24 @@
 import pygame
 
 from chest_sprite import Chest
-from door_load import Door
-from level3 import Level3
 from level_mask import LevelMask
 from load_image import load_image
 from platform_load import Platform
 
 
-class Level2(LevelMask):
+class Level3(LevelMask):
     def __init__(self, width, height):
         super().__init__(width, height, (50, 456, 240, 360, 240), False, 'training.jpg')
         self.platforms_list = []
         self.platform = Platform(self.platforms, load_image('platforms/double_brown.png'), self.screen, 400, 600)
         self.platforms_list.append(self.platform)
         self.all_sprites.add(self.platform)
-
         self.chest_group = pygame.sprite.Group()
-        self.door_group = pygame.sprite.Group()
-
         self.chest = Chest(self.chest_group, self.screen, 1050, 480)
         self.chest.image = pygame.transform.flip(self.chest.image, True, False)
         self.chest.opened_image = pygame.transform.flip(self.chest.opened_image, True, False)
         self.all_sprites.add(self.chest)
         self.mage.add_chest(self.chest)
-        self.door = Door(self.door_group, self.screen, 50, 300)
-        self.passed = False
-        self.ticks = 0
         self.execute()
 
     def execute(self):
@@ -36,13 +28,8 @@ class Level2(LevelMask):
             if self.stop:
                 return
             self.loop()
-            self.check_pass()
-
-            if self.passed:
-                self.ticks += 1
 
             self.all_sprites.draw(self.screen)
-            self.door_group.draw(self.screen)
             self.border_b.draw(self.screen)
             self.borders.draw(self.screen)
             self.chest_group.draw(self.screen)
@@ -56,6 +43,7 @@ class Level2(LevelMask):
 
             pygame.display.flip()
             self.clock.tick(self.FPS)
+            self.ticks += 1
             self.render()
         self.terminate()
 
@@ -67,20 +55,10 @@ class Level2(LevelMask):
                     abs(self.mage.y + self.mage.image.get_height() - self.chest.y) <= 230:
                 self.chest.open()
             if event.key == pygame.K_r:
-                New = Level2(self.width, self.height)
-                self.stop = True
-            if event.key == pygame.K_RETURN and self.passed and self.ticks >= self.FPS and self.mage.x - 50 <= \
-                    self.door.x:
-                Level3(self.width, self.height)
+                New = Level3(self.width, self.height)
                 self.stop = True
 
     def check_movement(self):
         pressed = pygame.key.get_pressed()
 
         self.mage.update(pressed, self.border_b, self.borders)
-
-    def check_pass(self):
-        if self.chest.image == self.chest.opened_image:
-            self.door.open()
-            self.passed = True
-            self.ticks += 1
