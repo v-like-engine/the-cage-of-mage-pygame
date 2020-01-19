@@ -15,6 +15,7 @@ class MainMenuButton(pygame.sprite.Sprite):
         self.group = group
         self.screen = screen
         self.event = event
+        self.font = 'font/Chalk_and_Pamor.ttf'
         self.x = x
         self.y = y
         self.stock = self.load_image('butt_n.png')
@@ -26,7 +27,7 @@ class MainMenuButton(pygame.sprite.Sprite):
         self.color = pygame.Color('grey')
         self.text = text
 
-        font = pygame.font.Font(None, 50)
+        font = pygame.font.Font(self.font, 50)
         text = font.render(text, 1, self.color)
         text_rect = ((self.rect.width - text.get_width()) // 2,
                      (self.rect.height - text.get_height()) // 2)

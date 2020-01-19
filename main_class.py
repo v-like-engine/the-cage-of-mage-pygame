@@ -9,6 +9,7 @@ class Game:
     def __init__(self, width, height):
         self.size = self.width, self.height = width, height
         self.FPS = 120
+        self.font = 'font/Chalk_and_Pamor.ttf'
         pygame.init()
         self.screen = pygame.display.set_mode(self.size)
         self.clock = pygame.time.Clock()
