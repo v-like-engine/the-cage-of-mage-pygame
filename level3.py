@@ -11,12 +11,23 @@ class Level3(LevelMask):
     def __init__(self, width, height):
         super().__init__(width, height, (50, 456, 240, 360, 240), False, 'training.jpg')
         self.platforms_list = []
+        self.draw_platforms()
+        self.draw_moving_platforms()
+        self.execute()
+
+    def draw_platforms(self):
         self.platform = Platform(self.platforms, load_image('platforms/double_brown.png'), self.screen, 400, 500)
         self.platforms_list.append(self.platform)
-        self.platform = MovingPlatform(self.platforms, load_image('platforms/double_brown.png'), self.screen, 300, 100)
+        self.all_sprites.add(self.platform)
+
+        self.platform = Platform(self.platforms, load_image('platforms/triple_brown.png'), self.screen, 600, 300)
         self.platforms_list.append(self.platform)
         self.all_sprites.add(self.platform)
-        self.execute()
+
+    def draw_moving_platforms(self):
+        self.platform = MovingPlatform(self.platforms, load_image('platforms/simple_grey.png'), self.screen, 200, 100)
+        self.platforms_list.append(self.platform)
+        self.all_sprites.add(self.platform)
 
     def execute(self):
         while self.running:

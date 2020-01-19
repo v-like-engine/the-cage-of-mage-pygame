@@ -18,7 +18,7 @@ class MovingPlatform(Platform):
         self.rect.y = y
 
     def update(self):
-        if self.rect.y >= 270 and not self.up:
+        if self.rect.y >= 470 and not self.up:
             self.up = True
             self.set_pos(self.rect.x, self.rect.y + self.step)
         elif self.rect.y <= 50 and self.up:
