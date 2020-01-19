@@ -3,6 +3,7 @@ import pygame
 from chest_sprite import Chest
 from level_mask import LevelMask
 from load_image import load_image
+from moving_platform_load import MovingPlatform
 from platform_load import Platform
 
 
@@ -11,6 +12,8 @@ class Level3(LevelMask):
         super().__init__(width, height, (50, 456, 240, 360, 240), False, 'training.jpg')
         self.platforms_list = []
         self.platform = Platform(self.platforms, load_image('platforms/double_brown.png'), self.screen, 400, 500)
+        self.platforms_list.append(self.platform)
+        self.platform = MovingPlatform(self.platforms, load_image('platforms/double_brown.png'), self.screen, 300, 100)
         self.platforms_list.append(self.platform)
         self.all_sprites.add(self.platform)
         self.execute()
