@@ -11,6 +11,7 @@ from platform_load import Platform
 class Level3(LevelMask):
     def __init__(self, width, height):
         super().__init__(width, height, (50, 456, 240, 360, 240), False, 'training.jpg')
+        self.ticks = 0
         self.platforms_list = []
 
         self.key_group = pygame.sprite.Group()
@@ -18,6 +19,7 @@ class Level3(LevelMask):
         self.draw_platforms()
         self.draw_moving_platforms()
         self.key = Key(self.key_group, self.screen, 1100, 190)
+        self.is_key = False
         self.execute()
 
     def draw_platforms(self):
@@ -42,10 +44,14 @@ class Level3(LevelMask):
                 return
             self.loop()
 
+            if not self.is_key:
+                self.check_key()
+
             self.all_sprites.draw(self.screen)
             self.border_b.draw(self.screen)
             self.borders.draw(self.screen)
-            self.key_group.draw(self.screen)
+            if not self.is_key:
+                self.key_group.draw(self.screen)
             self.mage_group.draw(self.screen)
             self.platforms.draw(self.screen)
 
@@ -70,3 +76,8 @@ class Level3(LevelMask):
         pressed = pygame.key.get_pressed()
 
         self.mage.update(pressed, self.border_b, self.borders)
+
+    def check_key(self):
+        if self.mage.rect.x + 30 >= self.key.rect.x and self.mage.rect.x + 30 <= self.key.rect.x + self.key.w and \
+                self.mage.rect.y <= self.key.rect.y:
+            self.is_key = True
