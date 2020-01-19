@@ -17,6 +17,7 @@ class Level3(LevelMask):
 
         self.key_group = pygame.sprite.Group()
         self.door_group = pygame.sprite.Group()
+        self.moving_platforms_group = pygame.sprite.Group()
 
         self.draw_platforms()
         self.draw_moving_platforms()
@@ -39,6 +40,7 @@ class Level3(LevelMask):
         self.platform = MovingPlatform(self.platforms, load_image('platforms/simple_grey.png'), self.screen, 200, 100)
         self.platforms_list.append(self.platform)
         self.all_sprites.add(self.platform)
+        self.moving_platforms_group.add(self.platform)
 
     def execute(self):
         while self.running:
@@ -102,4 +104,8 @@ class Level3(LevelMask):
             self.ticks += 1
 
     def check_platform(self):
-        pass
+        #if self.mage.x + 10 >= self.platform.rect.x and self.mage.x <= self.platform.w + self.platform.x and \
+        #       self.mage.y >= self.platform.rect.y + 100:
+        if pygame.sprite.spritecollideany(self.mage, self.moving_platforms_group):
+            Level3(self.width, self.height)
+            self.stop = True
