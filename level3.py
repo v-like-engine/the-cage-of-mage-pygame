@@ -1,6 +1,7 @@
 import pygame
 
 from chest_sprite import Chest
+from key_load import Key
 from level_mask import LevelMask
 from load_image import load_image
 from moving_platform_load import MovingPlatform
@@ -11,8 +12,12 @@ class Level3(LevelMask):
     def __init__(self, width, height):
         super().__init__(width, height, (50, 456, 240, 360, 240), False, 'training.jpg')
         self.platforms_list = []
+
+        self.key_group = pygame.sprite.Group()
+
         self.draw_platforms()
         self.draw_moving_platforms()
+        self.key = Key(self.key_group, self.screen, 1100, 190)
         self.execute()
 
     def draw_platforms(self):
@@ -40,6 +45,7 @@ class Level3(LevelMask):
             self.all_sprites.draw(self.screen)
             self.border_b.draw(self.screen)
             self.borders.draw(self.screen)
+            self.key_group.draw(self.screen)
             self.mage_group.draw(self.screen)
             self.platforms.draw(self.screen)
 

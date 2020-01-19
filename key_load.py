@@ -10,7 +10,7 @@ class Key(SimpleSprite):
         self.image = load_image('key.png')
         self.w = self.image.get_width()
         self.h = self.image.get_height()
-        pygame.transform.scale(self.image, (self.w // 2, self.h // 2))
+        self.image = pygame.transform.scale(self.image, (self.w // 10, self.h // 10))
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
