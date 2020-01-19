@@ -1,6 +1,7 @@
 import pygame
 
 from chest_sprite import Chest
+from door_load import Door
 from key_load import Key
 from level_mask import LevelMask
 from load_image import load_image
@@ -15,10 +16,13 @@ class Level3(LevelMask):
         self.platforms_list = []
 
         self.key_group = pygame.sprite.Group()
+        self.door_group = pygame.sprite.Group()
 
         self.draw_platforms()
         self.draw_moving_platforms()
         self.key = Key(self.key_group, self.screen, 1100, 190)
+        self.door = Door(self.door_group, self.screen, 50, 300)
+
         self.is_key = False
         self.execute()
 
@@ -47,7 +51,10 @@ class Level3(LevelMask):
             if not self.is_key:
                 self.check_key()
 
+            self.check_pass()
+
             self.all_sprites.draw(self.screen)
+            self.door_group.draw(self.screen)
             self.border_b.draw(self.screen)
             self.borders.draw(self.screen)
             if not self.is_key:
@@ -61,7 +68,6 @@ class Level3(LevelMask):
 
             pygame.display.flip()
             self.clock.tick(self.FPS)
-            self.ticks += 1
             self.render()
         self.terminate()
 
@@ -70,6 +76,12 @@ class Level3(LevelMask):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_r:
                 New = Level3(self.width, self.height)
+                self.stop = True
+            if event.key == pygame.K_e and self.passed:
+                self.door.open()
+            if event.key == pygame.K_RETURN and self.passed and self.ticks >= self.FPS and self.mage.x - 50 <= \
+                    self.door.x:
+                Level3(self.width, self.height)
                 self.stop = True
 
     def check_movement(self):
@@ -81,3 +93,8 @@ class Level3(LevelMask):
         if self.mage.rect.x + 30 >= self.key.rect.x and self.mage.rect.x + 30 <= self.key.rect.x + self.key.w and \
                 self.mage.rect.y <= self.key.rect.y:
             self.is_key = True
+
+    def check_pass(self):
+        if self.is_key:
+            self.passed = True
+            self.ticks += 1

@@ -43,6 +43,7 @@ class LevelMask(Game):
 
         self.stop = False
         self.ticks = 0
+        self.passed = False
 
     # def execute(self):
     #     while self.running:
