@@ -16,6 +16,8 @@ class Door(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
+        self.is_opened = False
 
     def open(self):
         self.image = self.opened
+        self.is_opened = True

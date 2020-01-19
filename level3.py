@@ -51,7 +51,9 @@ class Level3(LevelMask):
             if not self.is_key:
                 self.check_key()
 
-            self.check_pass()
+            if not self.passed:
+                self.check_pass()
+            self.check_platform()
 
             self.all_sprites.draw(self.screen)
             self.door_group.draw(self.screen)
@@ -79,8 +81,8 @@ class Level3(LevelMask):
                 self.stop = True
             if event.key == pygame.K_e and self.passed:
                 self.door.open()
-            if event.key == pygame.K_RETURN and self.passed and self.ticks >= self.FPS and self.mage.x - 50 <= \
-                    self.door.x:
+            if event.key == pygame.K_RETURN and self.passed and self.mage.x - 50 <= \
+                    self.door.x and self.door.is_opened:
                 Level3(self.width, self.height)
                 self.stop = True
 
@@ -98,3 +100,6 @@ class Level3(LevelMask):
         if self.is_key:
             self.passed = True
             self.ticks += 1
+
+    def check_platform(self):
+        pass
