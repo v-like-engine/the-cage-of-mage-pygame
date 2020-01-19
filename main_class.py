@@ -8,7 +8,7 @@ from cursor_class import Cursor
 class Game:
     def __init__(self, width, height):
         self.size = self.width, self.height = width, height
-        self.FPS = 60
+        self.FPS = 120
         pygame.init()
         self.screen = pygame.display.set_mode(self.size)
         self.clock = pygame.time.Clock()
