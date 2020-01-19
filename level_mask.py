@@ -14,9 +14,11 @@ class LevelMask(Game):
 
         self.all_sprites = pygame.sprite.Group()
         self.mage_group = pygame.sprite.Group()
-        self.border_b = pygame.sprite.Group()
+        self.bottom_border = pygame.sprite.Group()
         self.borders = pygame.sprite.Group()
+        self.border_roof = pygame.sprite.Group()
         self.platforms = pygame.sprite.Group()
+        self.backgrounds = pygame.sprite.Group()
         self.FPS = self.FPS
         self.screen = self.screen
         self.mage = Mage(*mage_prefs, self.FPS, self.platforms, chests)
@@ -34,8 +36,11 @@ class LevelMask(Game):
                 frame.move_frame(frame_width, 0)
                 x_frame += frame_width
                 self.bg_frames.append(frame)
+                frame.add(self.backgrounds)
         border_bottom = Border(1280, 64, 0, 692)
-        border_bottom.add(self.border_b)
+        border_bottom.add(self.bottom_border)
+        border_top = Border(1280, 32, 0, 0)
+        border_top.add(self.border_roof)
         border_left = Border(32, 720, 0, 0)
         border_right = Border(32, 720, 1248, 0)
         border_left.add(self.borders)
@@ -78,4 +83,4 @@ class LevelMask(Game):
 
     def check_movement(self):
         pressed = pygame.key.get_pressed()
-        self.mage.update(pressed, self.border_b, self.borders)
+        self.mage.update(pressed, self.bottom_border, self.borders, self.border_roof)

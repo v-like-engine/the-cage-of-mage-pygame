@@ -28,7 +28,7 @@ class Training(LevelMask):
             self.loop()
 
             self.all_sprites.draw(self.screen)
-            self.border_b.draw(self.screen)
+            self.bottom_border.draw(self.screen)
             self.borders.draw(self.screen)
             self.chest_group.draw(self.screen)
             self.chair_group.draw(self.screen)
@@ -67,4 +67,4 @@ class Training(LevelMask):
 
     def check_movement(self):
         pressed = pygame.key.get_pressed()
-        self.mage.update(pressed, self.border_b, self.borders)
+        self.mage.update(pressed, self.bottom_border, self.borders, self.border_roof)

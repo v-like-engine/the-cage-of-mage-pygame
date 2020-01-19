@@ -63,7 +63,11 @@ class Mage(AnimatedSprite):
 
     def update(self, pressed=None, *borders):
         dno = borders[0].sprites()[0].coords[1]
-        self.change_coords(2, dno)
+        if len(borders) > 2:
+            roof = borders[2].sprites()[0].coords[3]
+            self.change_coords(2, dno, roof)
+        else:
+            self.change_coords(2, dno)
         if not pygame.sprite.spritecollideany(self, borders[0]) and \
                 not pygame.sprite.spritecollideany(self, self.platforms):
             self.movement_coefficients = self.movement_coefficients[0], self.movement_coefficients[1] + self.g
@@ -138,6 +142,12 @@ class Mage(AnimatedSprite):
             if limits:
                 if limits[0] >= self.rect.y + self.height + self.vertical_velocity * self.movement_coefficients[1]:
                     self.y += int(self.vertical_velocity * self.movement_coefficients[1])
+                if len(limits) > 1:
+                    if limits[1] <= self.rect.y + self.vertical_velocity * self.movement_coefficients[1]:
+                        self.y += int(self.vertical_velocity * self.movement_coefficients[1])
+                    else:
+                        self.y = limits[1] - 1
+                        self.movement_coefficients = self.movement_coefficients[0], -self.movement_coefficients[1]
                 else:
                     self.y = limits[0] - self.height + 2
             else:

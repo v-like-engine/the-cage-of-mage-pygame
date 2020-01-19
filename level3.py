@@ -59,7 +59,7 @@ class Level3(LevelMask):
 
             self.all_sprites.draw(self.screen)
             self.door_group.draw(self.screen)
-            self.border_b.draw(self.screen)
+            self.bottom_border.draw(self.screen)
             self.borders.draw(self.screen)
             if not self.is_key:
                 self.key_group.draw(self.screen)
@@ -91,7 +91,7 @@ class Level3(LevelMask):
     def check_movement(self):
         pressed = pygame.key.get_pressed()
 
-        self.mage.update(pressed, self.border_b, self.borders)
+        self.mage.update(pressed, self.bottom_border, self.borders, self.border_roof)
 
     def check_key(self):
         if self.mage.rect.x + 30 >= self.key.rect.x and self.mage.rect.x + 30 <= self.key.rect.x + self.key.w and \

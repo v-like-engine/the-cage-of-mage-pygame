@@ -43,7 +43,7 @@ class Level2(LevelMask):
 
             self.all_sprites.draw(self.screen)
             self.door_group.draw(self.screen)
-            self.border_b.draw(self.screen)
+            self.bottom_border.draw(self.screen)
             self.borders.draw(self.screen)
             self.chest_group.draw(self.screen)
             self.mage_group.draw(self.screen)
@@ -76,8 +76,7 @@ class Level2(LevelMask):
 
     def check_movement(self):
         pressed = pygame.key.get_pressed()
-
-        self.mage.update(pressed, self.border_b, self.borders)
+        self.mage.update(pressed, self.bottom_border, self.borders, self.border_roof)
 
     def check_pass(self):
         if self.chest.image == self.chest.opened_image:

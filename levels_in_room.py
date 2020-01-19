@@ -18,11 +18,11 @@ class NewLevel(LevelMask):
             self.loop()
 
             self.all_sprites.draw(self.screen)
-            self.border_b.draw(self.screen)
+            self.bottom_border.draw(self.screen)
             self.borders.draw(self.screen)
             self.mage_group.draw(self.screen)
 
-            self.mage_group.update(event, 10, self.border_b, self.borders)
+            self.mage_group.update(event, 10, self.bottom_border, self.borders)
 
             pygame.display.flip()
             self.clock.tick(self.FPS)

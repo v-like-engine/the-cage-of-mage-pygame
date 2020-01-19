@@ -1,7 +1,6 @@
 import pygame
 
 from level_mask import LevelMask
-from load_image import load_image
 
 
 class PrologueLevel(LevelMask):
@@ -21,10 +20,11 @@ class PrologueLevel(LevelMask):
             self.screen.fill(pygame.Color('#383636'))
 
             self.all_sprites.draw(self.screen)
-            self.border_b.draw(self.screen)
+            self.bottom_border.draw(self.screen)
             self.borders.draw(self.screen)
-            self.mage_group.draw(self.screen)
+            self.backgrounds.draw(self.screen)
             self.platforms.draw(self.screen)
+            self.mage_group.draw(self.screen)
 
             self.check_movement()
             self.check_movement()
@@ -61,5 +61,4 @@ class PrologueLevel(LevelMask):
             self.camera_update(240 / self.FPS)
         elif pressed[pygame.K_RIGHT]:
             self.camera_update(-240 / self.FPS)
-        self.mage.update(pressed, self.border_b, self.borders)
-
+        self.mage.update(pressed, self.bottom_border, self.borders, self.border_roof)
