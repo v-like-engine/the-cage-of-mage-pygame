@@ -23,9 +23,9 @@ class Border(pygame.sprite.Sprite):
         pygame.draw.rect(self.image, pygame.Color('black'), (move_x, move_y, move_x + x, move_y + y))
         self.image.set_alpha(0)
 
-    def move_frame(self, x_diff, ydiff):
+    def move_frame(self, x_diff, y_diff):
         self.rect.x += x_diff
-        self.rect.y += ydiff
+        self.rect.y += y_diff
 
 
 class Decoration(pygame.sprite.Sprite):
@@ -36,6 +36,6 @@ class Decoration(pygame.sprite.Sprite):
             self.image = pygame.transform.scale(self.image, size)
         self.rect = self.image.get_rect().move(move_x, move_y)
 
-    def move_frame(self, x_diff, ydiff):
+    def move_frame(self, x_diff, y_diff):
         self.rect.x += x_diff
-        self.rect.y += ydiff
+        self.rect.y += y_diff

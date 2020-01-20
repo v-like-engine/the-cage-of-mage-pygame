@@ -1,7 +1,9 @@
 import pygame
 
-from background_sprites import Decoration, Border
+from background_sprites import Decoration
+from door_load import Door
 from effects import ScreenEffect
+from level2 import Level2
 from level_mask import LevelMask
 
 
@@ -26,11 +28,19 @@ class PrologueLevel(LevelMask):
         grid4.add(self.decor)
         grid5.add(self.decor)
         grid6.add(self.decor)
+        self.main_door = pygame.sprite.Group()
+        door_bg = Decoration('door_frame_fat.png', -2020, 380, 160, 320)
+        door_bg.add(self.main_door)
+        self.door = Door(self.main_door, self.screen, -1866, 380)
+        self.door.open()
         self.border_coord = 840
         self.ideal_border_coord = 840
         self.border_space = 120
         tma = ScreenEffect('tma.png', 0, 0)
         tma.add(self.tma_effect)
+        self.door_closed = False
+        self.ticks_until_level = 20
+        self.end = False
         self.execute()
 
     def execute(self):
@@ -49,6 +59,7 @@ class PrologueLevel(LevelMask):
             self.decor.draw(self.screen)
             self.platforms.draw(self.screen)
             self.mage_group.draw(self.screen)
+            self.main_door.draw(self.screen)
             self.tma_effect.draw(self.screen)
 
             self.check_movement()
@@ -58,24 +69,32 @@ class PrologueLevel(LevelMask):
             pygame.display.flip()
             self.clock.tick(self.FPS)
             self.ticks += 1
+            if self.ticks_until_level <= 0:
+                New = Level2(self.width, self.height)
+                self.stop = True
+            elif self.end:
+                self.ticks_until_level -= 1
             self.render()
         self.terminate()
 
     def camera_update(self, x):
         if self.cam_coord + self.mage.width // 2 < self.border_coord or x > 0 or\
                 self.border_coord < self.ideal_border_coord:
-            if self.bg_frames[-1].rect.x + x > 0:
-                x = 0 - self.bg_frames[-1].rect.x
+            if self.bg_frames[-1].rect.x + x > 50:
+                x = 50 - self.bg_frames[-1].rect.x
             for el in self.bg_frames:
                 el.move_frame(x, 0)
             for el in self.decor:
                 el.move_frame(x, 0)
+            for el in self.main_door:
+                el.move_frame(x, 0)
             if x > 0 or self.border_coord < self.ideal_border_coord:
                 self.border_coord -= x
-                print(self.border_coord, self.ideal_border_coord)
             if self.border_coord + self.border_space < self.ideal_border_coord:
                 self.ideal_border_coord = self.border_coord + self.border_space
             self.cam_coord -= x
+            if self.cam_coord <= -1940:
+                self.end_of_the_prologue()
 
     def handle_event(self, event):
         super().handle_event(event)
@@ -88,11 +107,21 @@ class PrologueLevel(LevelMask):
         pressed = pygame.key.get_pressed()
         if pressed[pygame.K_LSHIFT]:
             if pressed[pygame.K_LEFT]:
-                self.camera_update(360 / self.FPS)
+                self.camera_update(1660 / self.FPS)
             if pressed[pygame.K_RIGHT]:
-                self.camera_update(-360 / self.FPS)
+                self.camera_update(-1660 / self.FPS)
         elif pressed[pygame.K_LEFT]:
             self.camera_update(240 / self.FPS)
         elif pressed[pygame.K_RIGHT]:
             self.camera_update(-240 / self.FPS)
         self.mage.update(pressed, self.bottom_border, self.borders, self.border_roof)
+
+    def end_of_the_prologue(self):
+        if not self.door_closed:
+            self.door.open()
+            self.door_closed = True
+        self.border_coord = self.cam_coord + self.mage.width // 2
+        self.ideal_border_coord = self.cam_coord + self.mage.width // 2
+        self.border_space = 0
+        self.mage.velocity_change(0, 0, 0)
+        self.end = True

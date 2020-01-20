@@ -24,7 +24,7 @@ class Level2(LevelMask):
         self.chest.opened_image = pygame.transform.flip(self.chest.opened_image, True, False)
         self.all_sprites.add(self.chest)
         self.mage.add_chest(self.chest)
-        self.door = Door(self.door_group, self.screen, 50, 300)
+        self.door = Door(self.door_group, self.screen, 20, 340)
         self.passed = False
         self.ticks = 0
         self.execute()
