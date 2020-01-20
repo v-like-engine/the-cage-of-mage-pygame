@@ -123,7 +123,7 @@ class Mage(AnimatedSprite):
                 for platform in self.platforms:
                     if pygame.sprite.collide_mask(self, platform):
                         print(self.x, self.y, platform.rect.x, platform.rect.y)
-                        if  platform.rect.x + platform.width > self.x + self.width // 2 > platform.rect.x:
+                        if platform.rect.x + platform.width > self.x + self.width // 2 > platform.rect.x:
                             self.rect.y += 2
                         else:
                             self.movement_coefficients = -self.movement_coefficients[0], self.movement_coefficients[1]
