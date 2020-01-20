@@ -9,7 +9,7 @@ class Door(pygame.sprite.Sprite):
         self.x = x
         self.y = y
         self.simple_image = load_image('door_frame.png')
-        self.opened = load_image('door.png')
+        self.opened = load_image('door1.png')
         self.image = self.simple_image
         self.w = self.image.get_width()
         self.h = self.image.get_height()

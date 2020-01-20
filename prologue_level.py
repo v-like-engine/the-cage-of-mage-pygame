@@ -1,6 +1,6 @@
 import pygame
 
-from background_sprites import Decoration
+from background_sprites import Decoration, Border
 from effects import ScreenEffect
 from level_mask import LevelMask
 
@@ -12,15 +12,23 @@ class PrologueLevel(LevelMask):
                          'hall.jpg', 'hall.jpg', 'hall_end.jpg')
         self.tma_effect = pygame.sprite.Group()
         self.decor = pygame.sprite.Group()
-        grid0 = Decoration('grid_with_man2.png', 500, 300)
-        grid = Decoration('grid.png', 40, 300)
-        grid2 = Decoration('grid_with_man.png', -420, 300)
-        grid3 = Decoration('grid.png', -880, 300)
-        grid4 = Decoration('grid.png', -880, 300)
+        grid0 = Decoration('grid_with_man2.png', 700, 380, 280, 280)
+        grid = Decoration('grid.png', 320, 380, 280, 280)
+        grid2 = Decoration('grid_with_man.png', -60, 380, 280, 280)
+        grid3 = Decoration('grid.png', -440, 380, 280, 280)
+        grid4 = Decoration('grid.png', -820, 380, 280, 280)
+        grid5 = Decoration('grid_with_man2.png', -1200, 380, 280, 280)
+        grid6 = Decoration('grid_with_man.png', -1580, 380, 280, 280)
         grid0.add(self.decor)
         grid.add(self.decor)
         grid2.add(self.decor)
         grid3.add(self.decor)
+        grid4.add(self.decor)
+        grid5.add(self.decor)
+        grid6.add(self.decor)
+        self.border_coord = 840
+        self.ideal_border_coord = 840
+        self.border_space = 120
         tma = ScreenEffect('tma.png', 0, 0)
         tma.add(self.tma_effect)
         self.execute()
@@ -54,13 +62,20 @@ class PrologueLevel(LevelMask):
         self.terminate()
 
     def camera_update(self, x):
-        if self.bg_frames[-1].rect.x + x > 0:
-            x = 0 - self.bg_frames[-1].rect.x
-        for el in self.bg_frames:
-            el.move_frame(x, 0)
-        for el in self.decor:
-            el.move_frame(x, 0)
-        self.cam_coord -= x
+        if self.cam_coord + self.mage.width // 2 < self.border_coord or x > 0 or\
+                self.border_coord < self.ideal_border_coord:
+            if self.bg_frames[-1].rect.x + x > 0:
+                x = 0 - self.bg_frames[-1].rect.x
+            for el in self.bg_frames:
+                el.move_frame(x, 0)
+            for el in self.decor:
+                el.move_frame(x, 0)
+            if x > 0 or self.border_coord < self.ideal_border_coord:
+                self.border_coord -= x
+                print(self.border_coord, self.ideal_border_coord)
+            if self.border_coord + self.border_space < self.ideal_border_coord:
+                self.ideal_border_coord = self.border_coord + self.border_space
+            self.cam_coord -= x
 
     def handle_event(self, event):
         super().handle_event(event)

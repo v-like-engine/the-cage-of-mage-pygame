@@ -22,22 +22,24 @@ class Level3(LevelMask):
         self.draw_platforms()
         self.draw_moving_platforms()
         self.key = Key(self.key_group, self.screen, 1100, 190)
-        self.door = Door(self.door_group, self.screen, 50, 300)
+        self.door = Door(self.door_group, self.screen, 30, 340)
 
         self.is_key = False
         self.execute()
 
     def draw_platforms(self):
-        self.platform = Platform(self.platforms, load_image('platforms/double_brown.png'), self.screen, 400, 500)
+        self.platform = Platform(self.platforms, load_image('platforms/double_grey.png'), self.screen, 500, 500)
         self.platforms_list.append(self.platform)
         self.all_sprites.add(self.platform)
 
-        self.platform = Platform(self.platforms, load_image('platforms/triple_brown.png'), self.screen, 600, 300)
+        self.platform = Platform(self.platforms, load_image('platforms/double_grey.png'), self.screen, 900, 300)
         self.platforms_list.append(self.platform)
         self.all_sprites.add(self.platform)
 
     def draw_moving_platforms(self):
-        self.platform = MovingPlatform(self.platforms, load_image('platforms/simple_grey.png'), self.screen, 200, 100)
+        self.platform = MovingPlatform(self.platforms,
+                                       load_image('platforms/spiky_grey.png'), self.screen, 250, 100, 200, 470, 200, 50,
+                                       4)
         self.platforms_list.append(self.platform)
         self.all_sprites.add(self.platform)
         self.moving_platforms_group.add(self.platform)

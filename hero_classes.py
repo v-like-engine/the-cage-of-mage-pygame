@@ -137,7 +137,7 @@ class Mage(AnimatedSprite):
 
     def change_coords(self, x_or_y, *limits):
         if x_or_y in (0, 1):
-            self.x += self.current_horisontal_velocity * self.movement_coefficients[0]
+                self.x += self.current_horisontal_velocity * self.movement_coefficients[0]
         elif x_or_y in (0, 2):
             if limits:
                 if limits[0] >= self.rect.y + self.height + self.vertical_velocity * self.movement_coefficients[1]:
