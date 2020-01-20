@@ -4,14 +4,14 @@ from platform_load import Platform
 
 
 class MovingPlatform(Platform):
-    def __init__(self, group, image, screen, x, y, step):
+    def __init__(self, group, image, screen, x, y):
         self.image = pygame.transform.rotate(image, 90)
         super().__init__(group, self.image, screen, x, y)
         self.screen = screen
         self.h = self.image.get_height()
         self.screen_height = self.screen.get_height()
         self.up = False
-        self.step = step
+        self.step = 1000 // 200
 
     def set_pos(self, x, y):
         self.rect.x = x
