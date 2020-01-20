@@ -22,6 +22,9 @@ class MovingPlatform(Platform):
         self.rect.x = x
         self.rect.y = y
 
+    def change_speed(self, speed):
+        self.speed = speed
+
     def update(self):
         if self.start_y != self.moving_y:
             if self.rect.y >= self.start_y and not self.up:
