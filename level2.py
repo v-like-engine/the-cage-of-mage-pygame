@@ -27,6 +27,7 @@ class Level2(LevelMask):
         self.door = Door(self.door_group, self.screen, 20, 340)
         self.passed = False
         self.ticks = 0
+        self.door_opened = False
         self.execute()
 
     def execute(self):
@@ -79,7 +80,8 @@ class Level2(LevelMask):
         self.mage.update(pressed, self.bottom_border, self.borders, self.border_roof)
 
     def check_pass(self):
-        if self.chest.image == self.chest.opened_image:
+        if self.chest.image == self.chest.opened_image and not self.door_opened:
             self.door.open()
+            self.door_opened = True
             self.passed = True
             self.ticks += 1
