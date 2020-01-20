@@ -26,3 +26,16 @@ class Border(pygame.sprite.Sprite):
     def move_frame(self, x_diff, ydiff):
         self.rect.x += x_diff
         self.rect.y += ydiff
+
+
+class Decoration(pygame.sprite.Sprite):
+    def __init__(self, image_name, move_x, move_y, *size):
+        super().__init__()
+        self.image = load_image(image_name)
+        if size:
+            self.image = pygame.transform.scale(self.image, size)
+        self.rect = self.image.get_rect().move(move_x, move_y)
+
+    def move_frame(self, x_diff, ydiff):
+        self.rect.x += x_diff
+        self.rect.y += ydiff
