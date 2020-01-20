@@ -1,5 +1,6 @@
 import pygame
 
+from captions import Captions
 from chest_sprite import Chest
 from door_load import Door
 from key_load import Key
@@ -87,7 +88,7 @@ class Level3(LevelMask):
                 self.door.open()
             if event.key == pygame.K_RETURN and self.passed and self.mage.x - 50 <= \
                     self.door.x and self.door.is_opened:
-                Level3(self.width, self.height)
+                Captions(self.width, self.height)
                 self.stop = True
 
     def check_movement(self):
