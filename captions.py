@@ -51,7 +51,7 @@ class Captions(Game):
         for i in range(len(texts)):
             text = texts[i]
             text = self.font.render(text, 1, pygame.Color('white'))
-            text_rect = ((self.width // 2 - text.get_width() // 2, self.height // 8 + i * 70))
+            text_rect = (self.width // 2 - text.get_width() // 2, self.height // 8 + i * 70)
             self.screen.blit(text, text_rect)
 
         self.Vlad(2, 60)
@@ -71,10 +71,10 @@ class Captions(Game):
     def Vlad(self, k, diff):
         text = 'Vladislav Urzhumov'
         text = self.font.render(text, 1, pygame.Color('white'))
-        text_rect = ((self.width // 2 - text.get_width() // 2, self.height // 8 + k * diff))
+        text_rect = (self.width // 2 - text.get_width() // 2, self.height // 8 + k * diff)
         self.screen.blit(text, text_rect)
 
     def simple_text(self, k, diff, text):
         text = self.font.render(text, 1, pygame.Color('white'))
-        text_rect = ((self.width // 2 - text.get_width() // 2, self.height // 8 + k * diff))
+        text_rect = (self.width // 2 - text.get_width() // 2, self.height // 8 + k * diff)
         self.screen.blit(text, text_rect)
