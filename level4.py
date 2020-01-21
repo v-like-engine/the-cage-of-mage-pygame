@@ -37,7 +37,7 @@ class Level4(LevelMask):
         self.platforms_list.append(self.platform)
         self.all_sprites.add(self.platform)
 
-        self.platform = Platform(self.platforms, load_image('platforms/double_grey.png'), self.screen, 330, 70)
+        self.platform = Platform(self.platforms, load_image('platforms/double_grey.png'), self.screen, 310, 70)
         self.platforms_list.append(self.platform)
         self.all_sprites.add(self.platform)
 
