@@ -1,23 +1,81 @@
 import pygame
 
+from background_sprites import Decoration
+from main import TheCageOfMage
 from main_class import Game
+from text_import_from_file import load_text
 
 
 class Comics(Game):
     def __init__(self, width, height):
         super().__init__(width, height)
         self.ticks = 0
-        self.font = pygame.font.Font(self.font, 50)
-
-        self.draw_images()
+        self.font = pygame.font.Font(self.font, 30)
+        text_strs = load_text('data/mage_comics.txt')
+        self.text = []
+        while '\n' in text_strs:
+            k = text_strs.index('\n')
+            self.text.append(text_strs[:k])
+            text_strs = text_strs[k + 1:]
+        self.text.append(text_strs)
+        self.number_of_text = 0
+        dragon = Decoration('comics/dragon_comics.png', 280, 40, 720, 540)
+        self.dragon_group = pygame.sprite.Group()
+        dragon.add(self.dragon_group)
+        mage_escape = Decoration('comics/mage_escape_comics.png', 280, 40, 720, 540)
+        self.mage_escape_group = pygame.sprite.Group()
+        mage_escape.add(self.mage_escape_group)
+        self.comics_image_group = None
 
         self.execute()
 
     def execute(self):
-        pass
+        while self.running:
+            for event in pygame.event.get():
+                self.handle_event(event)
+            self.loop()
+            self.screen.fill(pygame.Color('black'))
+            self.number_of_text = int(self.ticks // (self.FPS * (61.4 / len(self.text))))
+            if self.number_of_text > len(self.text) - 1:
+                New = TheCageOfMage(1280, 720)
+                return
+            if self.ticks == self.FPS * 4:
+                pygame.mixer_music.stop()
+                pygame.mixer_music.load('data/Arti-Fix - Cybernetic Sect.mp3')
+                pygame.mixer_music.set_volume(0.049)
+                pygame.mixer_music.play(10, 0.0)
+            if self.ticks == self.FPS * 22:
+                pygame.mixer_music.stop()
+                pygame.mixer_music.load('data/Arti-Fix - Cybernetic Sect.mp3')
+                pygame.mixer_music.set_volume(0.049)
+                pygame.mixer_music.play(10, 6.0)
+            if self.ticks <= self.FPS * 12:
+                self.comics_image_group = None
+            elif self.ticks <= self.FPS * 29:
+                self.comics_image_group = self.dragon_group
+            elif self.ticks <= self.FPS * 37:
+                self.comics_image_group = self.mage_escape_group
+            elif self.ticks <= self.FPS * 54:
+                self.comics_image_group = self.mage_escape_group
+            elif self.ticks <= self.FPS * 62:
+                self.comics_image_group = None
+            else:
+                return
+            self.draw_images()
+            self.draw_text()
+            self.render()
+            self.ticks += 1
+            pygame.display.flip()
+        self.terminate()
 
     def draw_images(self):
-        pass
+        if self.comics_image_group:
+            self.comics_image_group.draw(self.screen)
 
-    def draw_text(self, *text):
-        pass
+    def draw_text(self):
+        for i in range(len(self.text[self.number_of_text])):
+            for i in range(len(self.text[self.number_of_text])):
+                text_draw = self.font.render(self.text[self.number_of_text][i], 1, pygame.Color('white'))
+                text_rect = (self.width // 2 - text_draw.get_width() // 2,
+                             600 + i * 40)
+                self.screen.blit(text_draw, text_rect)
