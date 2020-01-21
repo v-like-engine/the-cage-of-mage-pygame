@@ -39,3 +39,18 @@ class Decoration(pygame.sprite.Sprite):
     def move_frame(self, x_diff, y_diff):
         self.rect.x += x_diff
         self.rect.y += y_diff
+
+
+class Message(pygame.sprite.Sprite):
+    def __init__(self, image_name, move_x, move_y, rotate=0, *size):
+        super().__init__()
+        self.image = load_image(image_name)
+        if size:
+            self.image = pygame.transform.scale(self.image, size)
+        if rotate != 0:
+            self.image = pygame.transform.rotate(self.image, rotate)
+        self.rect = self.image.get_rect().move(move_x, move_y)
+
+    def move_frame(self, x_diff, y_diff):
+        self.rect.x += x_diff
+        self.rect.y += y_diff
