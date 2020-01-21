@@ -18,13 +18,15 @@ class Level1(LevelMask):
         self.platforms_list = []
 
         self.door_group = pygame.sprite.Group()
+        self.key_group = pygame.sprite.Group()
         self.opened_door = False
 
         self.door = Door(self.door_group, self.screen, 1222, 340)
         self.door.simple_image = pygame.transform.flip(self.door.simple_image, True, False)
-        #self.door.opened = pygame.transform.rotate(self.door.opened, 180)
         self.door.opened = pygame.transform.flip(self.door.opened, True, False)
-        self.passed = True
+
+        self.key = Key(self.key_group, self.screen, 500, 600)
+        self.is_key = False
 
         self.execute()
 
@@ -43,6 +45,11 @@ class Level1(LevelMask):
             self.door_group.draw(self.screen)
             self.bottom_border.draw(self.screen)
             self.borders.draw(self.screen)
+
+            if not self.is_key:
+                self.check_key()
+            if not self.is_key:
+                self.key_group.draw(self.screen)
             if self.visible:
                 self.mage_group.draw(self.screen)
             else:
@@ -83,6 +90,12 @@ class Level1(LevelMask):
 
         self.mage.update(pressed, self.bottom_border, self.borders, self.border_roof)
 
+    def check_key(self):
+        if self.mage.rect.x + 30 >= self.key.rect.x and self.mage.rect.x + 30 <= self.key.rect.x + self.key.w and \
+                self.mage.rect.y <= self.key.rect.y:
+            self.is_key = True
+
     def check_pass(self):
-        self.passed = True
-        self.ticks += 1
+        if self.is_key:
+            self.passed = True
+            self.ticks += 1
