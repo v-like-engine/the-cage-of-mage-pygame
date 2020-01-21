@@ -3,6 +3,7 @@ import pygame
 from background_sprites import Decoration
 from door_load import Door
 from effects import ScreenEffect
+from level1 import Level1
 from level2 import Level2
 from level_mask import LevelMask
 
@@ -70,7 +71,7 @@ class PrologueLevel(LevelMask):
             self.clock.tick(self.FPS)
             self.ticks += 1
             if self.ticks_until_level <= 0:
-                New = Level2(self.width, self.height)
+                New = Level1(self.width, self.height)
                 self.stop = True
             elif self.end:
                 self.ticks_until_level -= 1
