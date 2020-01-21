@@ -12,6 +12,9 @@ class LevelMask(Game):
         pygame.mixer_music.play(100, 0.0)
         pygame.mixer_music.set_volume(0.049)
 
+        self.visible = True
+        self.used_invisible = False
+
         self.all_sprites = pygame.sprite.Group()
         self.mage_group = pygame.sprite.Group()
         self.bottom_border = pygame.sprite.Group()
@@ -58,6 +61,10 @@ class LevelMask(Game):
                 pygame.mixer_music.play(0, 44.0)
                 pygame.mixer_music.set_volume(0.049)
                 self.stop = True
+            if event.key == pygame.K_1 and not self.used_invisible:
+                self.visible = False
+                self.used_invisible = True
+                self.ticks = 0
 
     def check_movement(self):
         pressed = pygame.key.get_pressed()

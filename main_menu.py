@@ -5,6 +5,7 @@ import pygame
 from captions import Captions
 from level2 import Level2
 from level3 import Level3
+from level4 import Level4
 from levels_in_room import NewLevel
 from new_training import Training
 from prologue_level import PrologueLevel

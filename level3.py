@@ -4,6 +4,7 @@ from captions import Captions
 from chest_sprite import Chest
 from door_load import Door
 from key_load import Key
+from level4 import Level4
 from level_mask import LevelMask
 from load_image import load_image
 from moving_platform_load import MovingPlatform
@@ -66,7 +67,12 @@ class Level3(LevelMask):
             self.borders.draw(self.screen)
             if not self.is_key:
                 self.key_group.draw(self.screen)
-            self.mage_group.draw(self.screen)
+            if self.visible:
+                self.mage_group.draw(self.screen)
+            else:
+                self.ticks += 1
+            if self.ticks >= self.FPS * 3 and not self.visible:
+                self.visible = True
             self.platforms.draw(self.screen)
 
             self.check_movement()
@@ -88,7 +94,7 @@ class Level3(LevelMask):
                 self.door.open()
             if event.key == pygame.K_RETURN and self.passed and self.mage.x - 50 <= \
                     self.door.x and self.door.is_opened:
-                Captions(self.width, self.height)
+                Level4(self.width, self.height)
                 self.stop = True
 
     def check_movement(self):

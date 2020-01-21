@@ -9,6 +9,10 @@ from main_class import Game
 class Captions(Game):
     def __init__(self, width, height):
         super().__init__(width, height)
+        pygame.mixer_music.stop()
+        pygame.mixer_music.load('data/Arti-Fix - Cybernetic Sect.mp3')
+        pygame.mixer_music.set_volume(0.049)
+        pygame.mixer_music.play(10, 44.0)
         self.ticks = 0
         self.font = pygame.font.Font(self.font, 50)
         self.logo_group = pygame.sprite.Group()

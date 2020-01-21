@@ -47,7 +47,12 @@ class Level2(LevelMask):
             self.bottom_border.draw(self.screen)
             self.borders.draw(self.screen)
             self.chest_group.draw(self.screen)
-            self.mage_group.draw(self.screen)
+            if self.visible:
+                self.mage_group.draw(self.screen)
+            else:
+                self.ticks += 1
+            if self.ticks >= self.FPS * 3 and not self.visible:
+                self.visible = True
             self.platforms.draw(self.screen)
 
             self.check_movement()
