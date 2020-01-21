@@ -1,3 +1,5 @@
+import sys
+
 import pygame
 
 from logo_load import Logo
@@ -10,6 +12,9 @@ class Captions(Game):
         self.ticks = 0
         self.font = pygame.font.Font(self.font, 50)
         self.logo_group = pygame.sprite.Group()
+        logo = Logo(self.logo_group, self.screen, 70, 80)
+        logo.rect.x = self.width // 2 - logo.image.get_width() // 2
+        logo.rect.y = self.height // 2 - logo.image.get_height() // 2
 
         self.draw_captions()
 
@@ -26,11 +31,9 @@ class Captions(Game):
             elif self.ticks <= self.FPS * 10:
                 self.draw_other_captions()
             elif self.ticks <= self.FPS * 20:
-                logo = Logo(self.logo_group, self.screen, 70, 80)
-                logo.rect.x = self.width // 2 - logo.image.get_width() // 2
-                logo.rect.y = self.height // 2 - logo.image.get_height() // 2
-
-            self.logo_group.draw(self.screen)
+                self.logo_group.draw(self.screen)
+            else:
+                return
             self.render()
             self.ticks += 1
             pygame.display.flip()
