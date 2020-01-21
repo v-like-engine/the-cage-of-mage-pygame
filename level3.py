@@ -1,7 +1,6 @@
 import pygame
 
 from captions import Captions
-from chest_sprite import Chest
 from door_load import Door
 from key_load import Key
 from level_mask import LevelMask
@@ -23,7 +22,7 @@ class Level3(LevelMask):
         self.draw_platforms()
         self.draw_moving_platforms()
         self.key = Key(self.key_group, self.screen, 1100, 190)
-        self.door = Door(self.door_group, self.screen, 30, 340)
+        self.door = Door(self.door_group, self.screen, 24, 340)
 
         self.is_key = False
         self.execute()
