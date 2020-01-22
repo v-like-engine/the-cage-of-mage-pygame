@@ -26,6 +26,9 @@ class Comics(Game):
         mage_escape = Decoration('comics/mage_escape_comics.png', 280, 40, 720, 540)
         self.mage_escape_group = pygame.sprite.Group()
         mage_escape.add(self.mage_escape_group)
+        throne = Decoration('comics/throne_comics.png', 280, 40, 720, 540)
+        self.throne_group = pygame.sprite.Group()
+        throne.add(self.throne_group)
         self.comics_image_group = None
 
         self.execute()
@@ -57,7 +60,7 @@ class Comics(Game):
             elif self.ticks <= self.FPS * 41:
                 self.comics_image_group = self.mage_escape_group
             elif self.ticks <= self.FPS * 54:
-                self.comics_image_group = self.mage_escape_group
+                self.comics_image_group = self.throne_group
             elif self.ticks <= self.FPS * 62:
                 self.comics_image_group = None
             else:
