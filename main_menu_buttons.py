@@ -1,6 +1,16 @@
+from os import path
+
 import pygame
 
-from load_image import load_image
+from captions import Captions
+from level1 import Level1
+from level2 import Level2
+from level3 import Level3
+from level4 import Level4
+from levels_in_room import NewLevel
+from new_training import Training
+from prologue_level import PrologueLevel
+from end_level import EndLevel
 
 
 class MainMenuButton(pygame.sprite.Sprite):
@@ -9,28 +19,58 @@ class MainMenuButton(pygame.sprite.Sprite):
         self.group = group
         self.screen = screen
         self.event = event
+        self.font = 'font/Chalk_and_Pamor.ttf'
         self.x = x
         self.y = y
-        self.stock = load_image('butt_n.png')
-        self.highlighting_image = load_image('target.png')
+        self.stock = self.load_image('butt_n.png')
+        self.highlighting_image = self.load_image('target.png')
         self.image = self.stock
         self.rect: pygame.Rect = self.image.get_rect()
         self.rect.x = self.x
         self.rect.y = self.y
         self.color = pygame.Color('grey')
+        self.text = text
 
-        font = pygame.font.Font(None, 50)
+        font = pygame.font.Font(self.font, 50)
         text = font.render(text, 1, self.color)
         text_rect = ((self.rect.width - text.get_width()) // 2,
                      (self.rect.height - text.get_height()) // 2)
         self.stock.blit(text, text_rect)
         self.highlighting_image.blit(text, text_rect)
-        # self.all_sprites = pygame.sprite.Group()
-        # self.web = 'web.jpg'
-        # self.web = self.load_image(self.web)
 
-    def update(self):
+    def load_image(self, name, colorkey=None):
+        fullname = path.join('data', name)
+        image = pygame.image.load(fullname).convert_alpha()
+        if colorkey is not None:
+            if colorkey == -1:
+                colorkey = image.get_at((0, 0))
+            image.set_colorkey(colorkey)
+        else:
+            image = image.convert_alpha()
+        return image
+
+    def update(self, event):
         if self.rect.collidepoint(*pygame.mouse.get_pos()):
             self.image = self.highlighting_image
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                print(self.text)
+                if self.text == 'Training':
+                    Training(1280, 720)
+                    return
+                elif self.text == 'Continue':
+                    with open('level_now.txt') as file:
+                        text = file.read()
+                    print(text)
+                    level = eval(text)
+                    returned = level(1280, 720, 0.0)
+                    print(returned)
+                    if str(returned) == '<level4.Level4 object at 0x00000246E0641B88>':
+                        EndLevel(1280, 720, 0.0)
+                    return
+                elif self.text == 'New game':
+                    returned = PrologueLevel(1280, 720, 0.0)
+                    if str(returned) == '<level4.Level4 object at 0x00000246E0641B88>':
+                        EndLevel(1280, 720, 0.0)
+                    return
         else:
             self.image = self.stock

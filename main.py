@@ -1,52 +1,28 @@
+import sys
+
 import pygame
 
-from main_manu_mage import MainMenuMage
-from main_menu_buttons import MainMenuButton
-
-
-class Game:
-    def __init__(self, width, height):
-        self.size = self.width, self.height = width, height
-        self.FPS = 30
-        pygame.init()
-        self.screen = pygame.display.set_mode(self.size)
-        self.clock = pygame.time.Clock()
-        self.running = True
-
-    def terminate(self):
-        pygame.quit()
-
-    def execute(self):
-        while self.running:
-            for event in pygame.event.get():
-                self.handle_event(event)
-            self.loop()
-            self.render()
-            pygame.display.flip()
-        self.terminate()
-
-    def handle_event(self, event):
-        if event.type == pygame.QUIT:
-            self.running = False
-        if event.type == pygame.KEYDOWN and pygame.key.get_mods() & pygame.KMOD_ALT:
-            if event.key == pygame.K_F4:
-                self.running = False
-
-    def loop(self):
-        self.clock.tick(self.FPS)
-
-    def render(self):
-        pass
+from main_class import Game
+from logo_load import Logo
+from mage_image_for_menu import MageMainMenu
+from main_menu import MainMenuButton
 
 
 class TheCageOfMage(Game):
     def __init__(self, width, height):
         super().__init__(width, height)
+        pygame.mixer_music.stop()
+        pygame.mixer_music.load('data/Arti-Fix - Cybernetic Sect.mp3')
+        pygame.mixer_music.set_volume(0.049)
+        pygame.mixer_music.play(10, 44.0)
         self.is_mouse_button_down = False
         self.buttons_sprites = pygame.sprite.Group()
-        self.mage_sprite = pygame.sprite.Group()
         self.buttons = []
         self.draw_buttons()
+        self.logo_group = pygame.sprite.Group()
+        self.logo = Logo(self.logo_group, self.screen, width // 50, -20)
+        self.mage_main_menu_group = pygame.sprite.Group()
+        self.mage_main_menu = MageMainMenu(self.mage_main_menu_group, self.screen, width // 12, self.height // 4)
         self.execute()
 
     def draw_buttons(self):
@@ -60,7 +36,6 @@ class TheCageOfMage(Game):
                                          self.is_mouse_button_down, texts[i])
                 self.buttons.append(new_btn)
                 self.buttons_sprites.add(new_btn)
-            mage = MainMenuMage(self.mage_sprite, self.screen, 100, 100)
         except AttributeError:
             pass
 
@@ -68,17 +43,21 @@ class TheCageOfMage(Game):
         while self.running:
             for event in pygame.event.get():
                 self.handle_event(event)
+                self.buttons_sprites.update(event)
             self.loop()
-            self.render()
-            self.mage_sprite.draw(self.screen)
+            self.screen.fill(pygame.Color('black'))
+            self.logo_group.draw(self.screen)
             self.buttons_sprites.draw(self.screen)
-            self.buttons_sprites.update()
-            self.mage_sprite.update()
+            self.mage_main_menu_group.draw(self.screen)
+            self.render()
+            self.logo_group.update()
+            self.mage_main_menu_group.update()
             pygame.display.flip()
         self.terminate()
 
     def terminate(self):
         pygame.quit()
+        sys.exit(0)
 
     def handle_event(self, event):
         super().handle_event(event)
@@ -89,13 +68,3 @@ class TheCageOfMage(Game):
 
     def loop(self):
         super().loop()
-        # Здесь движение
-
-    def render(self):
-        self.screen.fill(pygame.Color('black'))
-        # self.board.render(self.screen)
-        # Поле, когда оно появится)))
-
-
-game = TheCageOfMage(1280, 720)
-game.execute()
