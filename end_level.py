@@ -1,7 +1,7 @@
 import pygame
 
 from background_sprites import Decoration
-from main import TheCageOfMage
+from captions import Captions
 from prologue_level import PrologueLevel
 
 
@@ -53,7 +53,7 @@ class EndLevel(PrologueLevel):
             self.ticks += 1
             if self.ticks_until_level <= 0:
                 print(self.ticks, self.ticks_until_level)
-                New = TheCageOfMage(self.width, self.height)
+                New = Captions(self.width, self.height)
                 self.stop = True
             elif self.end_of_the_end:
                 self.ticks_until_level -= 1

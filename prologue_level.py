@@ -171,10 +171,10 @@ class PrologueLevel(LevelMask):
             if event.key == pygame.K_r:
                 New = PrologueLevel(self.width, self.height, pygame.mixer_music.get_pos())
                 self.stop = True
-            elif event.key == pygame.K_UP and self.j_mess:
+            elif not self.end_level and event.key == pygame.K_UP and self.j_mess:
                 self.jumping = True
                 self.j_mess = False
-            elif event.key in [pygame.K_RIGHT, pygame.K_LEFT] and self.m_mess:
+            elif not self.end_level and event.key in [pygame.K_RIGHT, pygame.K_LEFT] and self.m_mess:
                 self.moving = True
                 self.m_mess = False
 
