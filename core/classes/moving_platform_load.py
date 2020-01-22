@@ -1,6 +1,6 @@
 import pygame
 
-from platform_load import Platform
+from core.classes.platform_load import Platform
 
 
 class MovingPlatform(Platform):

@@ -2,10 +2,10 @@ import sys
 
 import pygame
 
-from main_class import Game
-from logo_load import Logo
-from mage_image_for_menu import MageMainMenu
-from main_menu import MainMenuButton
+from core.menu.main_class import Game
+from core.menu.logo_load import Logo
+from core.menu.mage_image_for_menu import MageMainMenu
+from core.menu.main_menu import MainMenuButton
 
 
 class TheCageOfMage(Game):

@@ -1,9 +1,7 @@
-import sys
-
 import pygame
 
-from logo_load import Logo
-from main_class import Game
+from core.menu.logo_load import Logo
+from core.menu.main_class import Game
 
 
 class Captions(Game):

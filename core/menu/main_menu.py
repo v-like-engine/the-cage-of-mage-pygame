@@ -2,15 +2,9 @@ from os import path
 
 import pygame
 
-from captions import Captions
-from level1 import Level1
-from level2 import Level2
-from level3 import Level3
-from level4 import Level4
-from levels_in_room import NewLevel
-from new_training import Training
-from prologue_level import PrologueLevel
-from end_level import EndLevel
+from core.levels.new_training import Training
+from core.levels.prologue_level import PrologueLevel
+from core.levels.end_level import EndLevel
 
 
 class MainMenuButton(pygame.sprite.Sprite):

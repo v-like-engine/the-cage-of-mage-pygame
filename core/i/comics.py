@@ -1,9 +1,9 @@
 import pygame
 
-from background_sprites import Decoration
-from main import TheCageOfMage
-from main_class import Game
-from text_import_from_file import load_text
+from core.classes.background_sprites import Decoration
+from core.menu.main import TheCageOfMage
+from core.menu.main_class import Game
+from utils.text_import_from_file import load_text
 
 
 class Comics(Game):

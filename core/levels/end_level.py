@@ -1,8 +1,8 @@
 import pygame
 
-from background_sprites import Decoration
-from captions import Captions
-from prologue_level import PrologueLevel
+from core.classes.background_sprites import Decoration
+from core.i.captions import Captions
+from core.levels.prologue_level import PrologueLevel
 
 
 class EndLevel(PrologueLevel):

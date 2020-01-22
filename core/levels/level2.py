@@ -1,11 +1,11 @@
 import pygame
 
-from chest_sprite import Chest
-from door_load import Door
-from level3 import Level3
-from level_mask import LevelMask
-from load_image import load_image
-from platform_load import Platform
+from core.classes.chest_sprite import Chest
+from core.classes.door_load import Door
+from core.levels.level3 import Level3
+from core.levels.level_mask import LevelMask
+from utils.load_image import load_image
+from core.classes.platform_load import Platform
 
 
 class Level2(LevelMask):

@@ -1,6 +1,6 @@
 import pygame
 
-from load_image import load_image
+from utils.load_image import load_image
 
 
 class Door(pygame.sprite.Sprite):

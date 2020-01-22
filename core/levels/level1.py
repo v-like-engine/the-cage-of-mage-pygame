@@ -1,14 +1,9 @@
 import pygame
 
-from captions import Captions
-from door_load import Door
-from key_load import Key
-from level2 import Level2
-from level4 import Level4
-from level_mask import LevelMask
-from load_image import load_image
-from moving_platform_load import MovingPlatform
-from platform_load import Platform
+from core.classes.door_load import Door
+from core.classes.key_load import Key
+from core.levels.level2 import Level2
+from core.levels.level_mask import LevelMask
 
 
 class Level1(LevelMask):

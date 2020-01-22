@@ -1,8 +1,8 @@
 import pygame
 
-from chair_sprite import Chair
-from chest_sprite import Chest
-from level_mask import LevelMask
+from core.classes.chair_sprite import Chair
+from core.classes.chest_sprite import Chest
+from core.levels.level_mask import LevelMask
 
 
 class Training(LevelMask):

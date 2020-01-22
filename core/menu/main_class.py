@@ -2,7 +2,7 @@ import sys
 
 import pygame
 
-from cursor_class import Cursor
+from core.classes.cursor_class import Cursor
 
 
 class Game:

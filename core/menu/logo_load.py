@@ -1,7 +1,5 @@
-import pygame
-
-from load_image import load_image
-from simple_sprite import SimpleSprite
+from utils.load_image import load_image
+from core.classes.simple_sprite import SimpleSprite
 
 
 class Logo(SimpleSprite):

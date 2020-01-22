@@ -1,10 +1,10 @@
 import pygame
 
-from background_sprites import Decoration, Message
-from door_load import Door
-from effects import ScreenEffect
-from level1 import Level1
-from level_mask import LevelMask
+from core.classes.background_sprites import Decoration, Message
+from core.classes.door_load import Door
+from core.classes.effects import ScreenEffect
+from core.levels.level1 import Level1
+from core.levels.level_mask import LevelMask
 
 
 class PrologueLevel(LevelMask):

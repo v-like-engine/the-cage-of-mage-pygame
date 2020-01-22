@@ -1,8 +1,8 @@
 import pygame
 
-from background_sprites import Background, Border
-from hero_classes import Mage
-from main_class import Game
+from core.classes.background_sprites import Background, Border
+from core.classes.hero_classes import Mage
+from core.menu.main_class import Game
 
 
 class LevelMask(Game):
