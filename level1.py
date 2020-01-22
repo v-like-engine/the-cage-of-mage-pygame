@@ -78,12 +78,12 @@ class Level1(LevelMask):
                 self.door.rect.x -= self.door.image.get_width()
             if event.key == pygame.K_RETURN and self.passed and self.mage.x - 50 <= \
                     self.door.x and self.door.is_opened:
-                Level2(self.width, self.height)
+                Level2(self.width, self.height, 0.0)
                 self.save('Level2')
                 self.stop = True
 
     def restart(self):
-        New = Level1(self.width, self.height)
+        New = Level1(self.width, self.height, 0.0)
         self.stop = True
 
     def check_movement(self):

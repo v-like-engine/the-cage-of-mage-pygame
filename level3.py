@@ -116,5 +116,5 @@ class Level3(LevelMask):
         #if self.mage.x + 10 >= self.platform.rect.x and self.mage.x <= self.platform.w + self.platform.x and \
         #       self.mage.y >= self.platform.rect.y + 100:
         if pygame.sprite.spritecollideany(self.mage, self.moving_platforms_group):
-            Level3(self.width, self.height)
+            Level3(self.width, self.height, 0.0)
             self.stop = True

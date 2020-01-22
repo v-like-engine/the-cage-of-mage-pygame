@@ -7,6 +7,7 @@ from prologue_level import PrologueLevel
 
 class EndLevel(PrologueLevel):
     def __init__(self, width, height, mus):
+        self.save('EndLevel')
         self.cam_coord = 640
         super().__init__(width, height, mus, True)
         backdoor = Decoration('door_frame_high.png', -190, 220)
@@ -84,6 +85,10 @@ class EndLevel(PrologueLevel):
             if event.key == pygame.K_r:
                 New = EndLevel(self.width, self.height, pygame.mixer_music.get_pos())
                 self.stop = True
+
+    def restart(self):
+        EndLevel(1280, 720, 0.0)
+        self.stop = True
 
     def camera_move(self, x):
         for el in self.bg_frames:

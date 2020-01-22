@@ -97,7 +97,6 @@ class Level4(LevelMask):
                 self.door.open()
             if event.key == pygame.K_RETURN and self.passed and self.mage.x - 50 <= \
                     self.door.x and self.door.is_opened:
-                Captions(self.width, self.height)
                 self.save('EndLevel')
                 self.stop = True
 
