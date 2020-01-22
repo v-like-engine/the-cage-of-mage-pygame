@@ -125,7 +125,6 @@ class Mage(AnimatedSprite):
                         if platform.rect.x + platform.width > self.x + self.width // 2 > platform.rect.x:
                             if self.rect.y + self.height >= platform.rect.y:
                                 self.y = platform.rect.y + 2 - self.height
-                                print(self.y, self.rect.y)
                         else:
                             self.movement_coefficients = -self.movement_coefficients[0], self.movement_coefficients[1]
                             self.change_coords(0)

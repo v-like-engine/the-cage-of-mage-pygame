@@ -16,7 +16,6 @@ class PrologueLevel(LevelMask):
             t = ['freedom.png', 'hall_right.jpg']
         else:
             t = ['hall.jpg']
-        print(*t)
         super().__init__(width, height, mus, (self.cam_coord - 160 // 2, 456, 0, 0, 240), False,
                          *t, 'hall.jpg', 'hall_end.jpg')
         self.decor = pygame.sprite.Group()
@@ -192,9 +191,7 @@ class PrologueLevel(LevelMask):
                 self.angry = False
                 self.get_in = True
         self.angry_num = int((self.ticks // (self.FPS * 0.3)) % len(self.angry_mess))
-        print(self.ticks, self.angry_num)
         self.num_get_in = int((self.ticks // (self.FPS * 0.5)) % len(self.angry_mess))
-        print(self.num_get_in)
 
     def check_movement(self):
         pressed = pygame.key.get_pressed()

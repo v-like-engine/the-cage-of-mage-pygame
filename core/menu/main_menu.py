@@ -52,8 +52,8 @@ class MainMenuButton(pygame.sprite.Sprite):
             self.image = self.highlighting_image
             if event.type == pygame.MOUSEBUTTONDOWN:
                 print(self.text)
-                if self.text == 'Training':
-                    Training(1280, 720)
+                if self.text == 'Final':
+                    EndLevel(1280, 720, 0.0)
                     return
                 elif self.text == 'Continue':
                     with open('level_now.txt') as file:
