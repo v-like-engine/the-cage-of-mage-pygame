@@ -2,6 +2,10 @@ from os import path
 
 import pygame
 
+from core.levels.level1 import Level1
+from core.levels.level2 import Level2
+from core.levels.level3 import Level3
+from core.levels.level4 import Level4
 from core.levels.new_training import Training
 from core.levels.prologue_level import PrologueLevel
 from core.levels.end_level import EndLevel
@@ -56,15 +60,10 @@ class MainMenuButton(pygame.sprite.Sprite):
                         text = file.read()
                     print(text)
                     level = eval(text)
-                    returned = level(1280, 720, 0.0)
-                    print(returned)
-                    if str(returned) == '<level4.Level4 object at 0x00000246E0641B88>':
-                        EndLevel(1280, 720, 0.0)
+                    level(1280, 720, 0.0)
                     return
                 elif self.text == 'New game':
-                    returned = PrologueLevel(1280, 720, 0.0)
-                    if str(returned) == '<level4.Level4 object at 0x00000246E0641B88>':
-                        EndLevel(1280, 720, 0.0)
+                    PrologueLevel(1280, 720, 0.0)
                     return
         else:
             self.image = self.stock
