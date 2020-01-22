@@ -94,6 +94,7 @@ class Level3(LevelMask):
             if event.key == pygame.K_RETURN and self.passed and self.mage.x - 50 <= \
                     self.door.x and self.door.is_opened:
                 Level4(self.width, self.height, pygame.mixer_music.get_pos())
+                self.save('Level4')
                 self.stop = True
 
     def check_movement(self):

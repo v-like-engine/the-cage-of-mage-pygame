@@ -78,6 +78,7 @@ class Level2(LevelMask):
             if event.key == pygame.K_RETURN and self.passed and self.ticks >= self.FPS and self.mage.x - 50 <= \
                     self.door.x:
                 Level3(self.width, self.height, pygame.mixer_music.get_pos())
+                self.save('Level3')
                 self.stop = True
 
     def check_movement(self):

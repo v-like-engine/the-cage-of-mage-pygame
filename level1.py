@@ -79,6 +79,7 @@ class Level1(LevelMask):
             if event.key == pygame.K_RETURN and self.passed and self.mage.x - 50 <= \
                     self.door.x and self.door.is_opened:
                 Level2(self.width, self.height)
+                self.save('Level2')
                 self.stop = True
 
     def restart(self):

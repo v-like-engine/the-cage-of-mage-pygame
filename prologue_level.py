@@ -3,12 +3,13 @@ import pygame
 from background_sprites import Decoration, Message
 from door_load import Door
 from effects import ScreenEffect
-from level2 import Level2
+from level1 import Level1
 from level_mask import LevelMask
 
 
 class PrologueLevel(LevelMask):
     def __init__(self, width, height, mus, end=False):
+        self.save('PrologueLevel')
         self.cam_coord = 640
         self.end_level = end
         if end:
@@ -139,7 +140,8 @@ class PrologueLevel(LevelMask):
             self.clock.tick(self.FPS)
             self.ticks += 1
             if self.ticks_until_level <= 0:
-                New = Level2(self.width, self.height, pygame.mixer_music.get_pos())
+                New = Level1(self.width, self.height, pygame.mixer_music.get_pos())
+                self.save('Level1')
                 self.stop = True
             elif self.end:
                 self.ticks_until_level -= 1

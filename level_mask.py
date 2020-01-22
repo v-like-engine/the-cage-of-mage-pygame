@@ -69,3 +69,7 @@ class LevelMask(Game):
     def check_movement(self):
         pressed = pygame.key.get_pressed()
         self.mage.update(pressed, self.bottom_border, self.borders, self.border_roof)
+
+    def save(self, level):
+        with open('level_now.txt', mode='w', encoding='UTF8') as file:
+            file.write(level)
