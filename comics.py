@@ -13,6 +13,7 @@ class Comics(Game):
         self.font = pygame.font.Font(self.font, 30)
         text_strs = load_text('data/mage_comics.txt')
         self.text = []
+        self.stop = False
         while '\n' in text_strs:
             k = text_strs.index('\n')
             self.text.append(text_strs[:k])
@@ -25,6 +26,9 @@ class Comics(Game):
         mage_escape = Decoration('comics/mage_escape_comics.png', 280, 40, 720, 540)
         self.mage_escape_group = pygame.sprite.Group()
         mage_escape.add(self.mage_escape_group)
+        throne = Decoration('comics/throne_comics.png', 280, 40, 720, 540)
+        self.throne_group = pygame.sprite.Group()
+        throne.add(self.throne_group)
         self.comics_image_group = None
 
         self.execute()
@@ -37,7 +41,7 @@ class Comics(Game):
             self.screen.fill(pygame.Color('black'))
             self.number_of_text = int(self.ticks // (self.FPS * (61.4 / len(self.text))))
             if self.number_of_text > len(self.text) - 1:
-                New = TheCageOfMage(1280, 720)
+                New = TheCageOfMage(self.width, self.height)
                 return
             if self.ticks == self.FPS * 4:
                 pygame.mixer_music.stop()
@@ -53,10 +57,10 @@ class Comics(Game):
                 self.comics_image_group = None
             elif self.ticks <= self.FPS * 29:
                 self.comics_image_group = self.dragon_group
-            elif self.ticks <= self.FPS * 37:
+            elif self.ticks <= self.FPS * 41:
                 self.comics_image_group = self.mage_escape_group
             elif self.ticks <= self.FPS * 54:
-                self.comics_image_group = self.mage_escape_group
+                self.comics_image_group = self.throne_group
             elif self.ticks <= self.FPS * 62:
                 self.comics_image_group = None
             else:
@@ -66,7 +70,15 @@ class Comics(Game):
             self.render()
             self.ticks += 1
             pygame.display.flip()
+            if self.stop:
+                TheCageOfMage(self.width, self.height)
+                return
         self.terminate()
+
+    def handle_event(self, event):
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                self.stop = True
 
     def draw_images(self):
         if self.comics_image_group:

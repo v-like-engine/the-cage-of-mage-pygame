@@ -9,8 +9,8 @@ from platform_load import Platform
 
 
 class Level2(LevelMask):
-    def __init__(self, width, height):
-        super().__init__(width, height, (50, 456, 240, 360, 240), False, 'training.jpg')
+    def __init__(self, width, height, mus):
+        super().__init__(width, height, mus, (50, 456, 240, 360, 240), False, 'training.jpg')
         self.platforms_list = []
         self.platform = Platform(self.platforms, load_image('platforms/double_brown.png'), self.screen, 400, 600)
         self.platforms_list.append(self.platform)
@@ -73,11 +73,11 @@ class Level2(LevelMask):
                     abs(self.mage.y + self.mage.image.get_height() - self.chest.y) <= 230:
                 self.chest.open()
             if event.key == pygame.K_r:
-                New = Level2(self.width, self.height)
+                New = Level2(self.width, self.height, pygame.mixer_music.get_pos())
                 self.stop = True
             if event.key == pygame.K_RETURN and self.passed and self.ticks >= self.FPS and self.mage.x - 50 <= \
                     self.door.x:
-                Level3(self.width, self.height)
+                Level3(self.width, self.height, pygame.mixer_music.get_pos())
                 self.stop = True
 
     def check_movement(self):

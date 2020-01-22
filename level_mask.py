@@ -6,10 +6,10 @@ from main_class import Game
 
 
 class LevelMask(Game):
-    def __init__(self, width, height, mage_prefs, chests, background_file, *camera_frames):
+    def __init__(self, width, height, mus, mage_prefs, chests, background_file, *camera_frames):
         super().__init__(width, height)
         pygame.mixer_music.load('data/Kytami-Sirens.mp3')
-        pygame.mixer_music.play(100, 0.0)
+        pygame.mixer_music.play(100, mus)
         pygame.mixer_music.set_volume(0.049)
 
         self.visible = True

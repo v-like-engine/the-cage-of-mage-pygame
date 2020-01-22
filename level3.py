@@ -11,8 +11,8 @@ from platform_load import Platform
 
 
 class Level3(LevelMask):
-    def __init__(self, width, height):
-        super().__init__(width, height, (50, 456, 240, 360, 240), False, 'training.jpg')
+    def __init__(self, width, height, mus):
+        super().__init__(width, height, mus, (50, 456, 240, 360, 240), False, 'training.jpg')
         self.ticks = 0
         self.platforms_list = []
 
@@ -87,13 +87,13 @@ class Level3(LevelMask):
         super().handle_event(event)
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_r:
-                New = Level3(self.width, self.height)
+                New = Level3(self.width, self.height, pygame.mixer_music.get_pos())
                 self.stop = True
             if event.key == pygame.K_e and self.passed:
                 self.door.open()
             if event.key == pygame.K_RETURN and self.passed and self.mage.x - 50 <= \
                     self.door.x and self.door.is_opened:
-                Level4(self.width, self.height)
+                Level4(self.width, self.height, pygame.mixer_music.get_pos())
                 self.stop = True
 
     def check_movement(self):
@@ -102,7 +102,7 @@ class Level3(LevelMask):
         self.mage.update(pressed, self.bottom_border, self.borders, self.border_roof)
 
     def check_key(self):
-        if self.mage.rect.x + 30 >= self.key.rect.x and self.mage.rect.x + 30 <= self.key.rect.x + self.key.w and \
+        if self.key.rect.x <= self.mage.rect.x + self.mage.width // 2 <= self.key.rect.x + self.key.w and \
                 self.mage.rect.y <= self.key.rect.y:
             self.is_key = True
 
