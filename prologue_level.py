@@ -8,25 +8,30 @@ from level_mask import LevelMask
 
 
 class PrologueLevel(LevelMask):
-    def __init__(self, width, height, end=False):
+    def __init__(self, width, height, mus, end=False):
         self.cam_coord = 640
         self.end_level = end
         if end:
-            t = 'hall.jpg' 'hall.jpg'
+            t = ['freedom.png', 'hall_right.jpg']
         else:
             t = ['hall.jpg']
-        super().__init__(width, height, (self.cam_coord - 160 // 2, 456, 0, 0, 240), False,
+        print(*t)
+        super().__init__(width, height, mus, (self.cam_coord - 160 // 2, 456, 0, 0, 240), False,
                          *t, 'hall.jpg', 'hall_end.jpg')
         if not end:
             self.tma_effect = pygame.sprite.Group()
         self.decor = pygame.sprite.Group()
-        grid0 = Decoration('grid_with_man2.png', 700, 380, 280, 280)
-        grid = Decoration('grid.png', 320, 380, 280, 280)
-        grid2 = Decoration('grid_with_man.png', -60, 380, 280, 280)
-        grid3 = Decoration('grid.png', -440, 380, 280, 280)
-        grid4 = Decoration('grid.png', -820, 380, 280, 280)
-        grid5 = Decoration('grid_with_man2.png', -1200, 380, 280, 280)
-        grid6 = Decoration('grid_with_man.png', -1580, 380, 280, 280)
+        if end:
+            space = -1280
+        else:
+            space = 0
+        grid0 = Decoration('grid_with_man2.png', 700 + space, 380, 280, 280)
+        grid = Decoration('grid.png', 320 + space, 380, 280, 280)
+        grid2 = Decoration('grid_with_man.png', -60 + space, 380, 280, 280)
+        grid3 = Decoration('grid.png', -440 + space, 380, 280, 280)
+        grid4 = Decoration('grid.png', -820 + space, 380, 280, 280)
+        grid5 = Decoration('grid_with_man2.png', -1200 + space, 380, 280, 280)
+        grid6 = Decoration('grid_with_man.png', -1580 + space, 380, 280, 280)
         grid0.add(self.decor)
         grid.add(self.decor)
         grid2.add(self.decor)
@@ -34,10 +39,14 @@ class PrologueLevel(LevelMask):
         grid4.add(self.decor)
         grid5.add(self.decor)
         grid6.add(self.decor)
-        self.main_door = pygame.sprite.Group()
-        door_bg = Decoration('door_frame_fat.png', -2020, 380, 160, 320)
-        door_bg.add(self.main_door)
-        self.door = Door(self.main_door, self.screen, -1866, 380)
+        self.main_doors = pygame.sprite.Group()
+        if not end:
+            coordoor = [-2020, -1866]
+        else:
+            coordoor = [-3300, -3146]
+        door_bg = Decoration('door_frame_fat.png', coordoor[0], 380, 160, 320)
+        door_bg.add(self.main_doors)
+        self.door = Door(self.main_doors, self.screen, coordoor[1], 380)
         self.door.open()
         self.border_coord = 840
         self.ideal_border_coord = 840
@@ -67,7 +76,7 @@ class PrologueLevel(LevelMask):
             self.decor.draw(self.screen)
             self.platforms.draw(self.screen)
             self.mage_group.draw(self.screen)
-            self.main_door.draw(self.screen)
+            self.main_doors.draw(self.screen)
             if not self.end_level:
                 self.tma_effect.draw(self.screen)
 
@@ -79,7 +88,7 @@ class PrologueLevel(LevelMask):
             self.clock.tick(self.FPS)
             self.ticks += 1
             if self.ticks_until_level <= 0:
-                New = Level2(self.width, self.height)
+                New = Level2(self.width, self.height, pygame.mixer_music.get_pos())
                 self.stop = True
             elif self.end:
                 self.ticks_until_level -= 1
@@ -95,7 +104,7 @@ class PrologueLevel(LevelMask):
                 el.move_frame(x, 0)
             for el in self.decor:
                 el.move_frame(x, 0)
-            for el in self.main_door:
+            for el in self.main_doors:
                 el.move_frame(x, 0)
             if x > 0 or self.border_coord < self.ideal_border_coord:
                 self.border_coord -= x
@@ -109,16 +118,16 @@ class PrologueLevel(LevelMask):
         super().handle_event(event)
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_r:
-                New = PrologueLevel(self.width, self.height)
+                New = PrologueLevel(self.width, self.height, pygame.mixer_music.get_pos())
                 self.stop = True
 
     def check_movement(self):
         pressed = pygame.key.get_pressed()
         if pressed[pygame.K_LSHIFT]:
             if pressed[pygame.K_LEFT]:
-                self.camera_update(1660 / self.FPS)
+                self.camera_update(360 / self.FPS)
             if pressed[pygame.K_RIGHT]:
-                self.camera_update(-1660 / self.FPS)
+                self.camera_update(-360 / self.FPS)
         elif pressed[pygame.K_LEFT]:
             self.camera_update(240 / self.FPS)
         elif pressed[pygame.K_RIGHT]:

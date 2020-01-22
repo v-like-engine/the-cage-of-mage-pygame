@@ -3,6 +3,7 @@ from os import path
 import pygame
 
 from captions import Captions
+from prologue_level import PrologueLevel
 from level1 import Level1
 from level2 import Level2
 from level3 import Level3
@@ -56,15 +57,15 @@ class MainMenuButton(pygame.sprite.Sprite):
                 if self.text == 'Training':
                     Training(1280, 720)
                     return
-                elif self.text == 'New game':
+                elif self.text == 'Continue':
                     with open('level_now.txt') as file:
                         text = file.read()
                     print(text)
                     level = eval(text)
-                    level(1280, 720)
+                    level(1280, 720, 0.0)
                     return
-                elif self.text == 'Continue':
-                    PrologueLevel(1280, 720)
+                elif self.text == 'New game':
+                    PrologueLevel(1280, 720, 0.0)
                     return
         else:
             self.image = self.stock

@@ -2,14 +2,14 @@ import pygame
 
 from chair_sprite import Chair
 from chest_sprite import Chest
-from hero_classes import Mage
 from level_mask import LevelMask
+
 
 class Training(LevelMask):
     def __init__(self, width, height):
         self.chest = None
         self.chest_group = pygame.sprite.Group()
-        super().__init__(width, height, (50, 456, 240, 360, 240), self.chest_group,
+        super().__init__(width, height, 0.0, (50, 456, 240, 360, 240), self.chest_group,
                          'training.jpg')
         self.chair_group = pygame.sprite.Group()
 
