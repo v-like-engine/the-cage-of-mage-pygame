@@ -12,3 +12,7 @@ Once upon a time, the world's last ochlocratic Kingdom was overtaken by the larg
 * Different ways to pass levels  
 * Beautiful simplified hand-drawn graphics
 * Even more!
+
+Screenshots:
+![Comics](screenshots/comics_image.png)
+![Prologue](screenshots/prologue_image.png)
