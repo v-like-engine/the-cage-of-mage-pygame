@@ -11,6 +11,7 @@ class Level1(LevelMask):
         super().__init__(width, height, mus, (50, 456, 240, 360, 240), False, 'training.jpg')
         self.ticks = 0
         self.platforms_list = []
+        self.save('Level1')
 
         self.door_group = pygame.sprite.Group()
         self.key_group = pygame.sprite.Group()
@@ -74,7 +75,6 @@ class Level1(LevelMask):
             if event.key == pygame.K_RETURN and self.passed and self.mage.x - 50 <= \
                     self.door.x and self.door.is_opened:
                 Level2(self.width, self.height, 0.0)
-                self.save('Level2')
                 self.stop = True
 
     def restart(self):

@@ -71,5 +71,13 @@ class LevelMask(Game):
         self.mage.update(pressed, self.bottom_border, self.borders, self.border_roof)
 
     def save(self, level):
-        with open('level_now.txt', mode='w', encoding='UTF8') as file:
-            file.write(level)
+        with open('level_now.txt', mode='r', encoding='UTF8') as file:
+            level_now = file.read()
+        if level_now != 'PrologueLevel' and level_now != 'EndLevel' and \
+            level != 'PrologueLevel' and level != 'EndLevel':
+            if int(level_now[level_now.rfind('level'):]) < int(level[level.rfind('level'):]):
+                with open('level_now.txt', mode='w', encoding='UTF8') as file:
+                    file.write(level)
+        else:
+            with open('level_now.txt', mode='w', encoding='UTF8') as file:
+                file.write(level)

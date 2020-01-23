@@ -11,6 +11,7 @@ from core.classes.platform_load import Platform
 class Level2(LevelMask):
     def __init__(self, width, height, mus):
         super().__init__(width, height, mus, (50, 456, 240, 360, 240), False, 'training.jpg')
+        self.save('Level2')
         self.platforms_list = []
         self.platform = Platform(self.platforms, load_image('platforms/double_brown.png'), self.screen, 400, 600)
         self.platforms_list.append(self.platform)
@@ -78,7 +79,6 @@ class Level2(LevelMask):
             if event.key == pygame.K_RETURN and self.passed and self.ticks >= self.FPS and self.mage.x - 50 <= \
                     self.door.x:
                 Level3(self.width, self.height, pygame.mixer_music.get_pos())
-                self.save('Level3')
                 self.stop = True
 
     def check_movement(self):

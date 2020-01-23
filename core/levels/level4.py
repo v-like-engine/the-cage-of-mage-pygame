@@ -11,6 +11,7 @@ from core.classes.platform_load import Platform
 class Level4(LevelMask):
     def __init__(self, width, height, mus):
         super().__init__(width, height, mus, (50, 456, 240, 360, 240), False, 'training.jpg')
+        self.save('Level4')
         self.ticks = 0
         self.platforms_list = []
 
