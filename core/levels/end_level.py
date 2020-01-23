@@ -1,15 +1,15 @@
 import pygame
 
+from camera_level_mask import CameraLevel
 from core.classes.background_sprites import Decoration
 from core.additional_game_processes.captions import Captions
-from core.levels.prologue_level import PrologueLevel
 
 
-class EndLevel(PrologueLevel):
+class EndLevel(CameraLevel):
     def __init__(self, width, height, mus):
         self.save('EndLevel')
         self.cam_coord = 640
-        super().__init__(width, height, mus, True)
+        super().__init__(width, height, mus, end=True)
         backdoor = Decoration('door_frame_high.png', -190, 220)
         backdoor.add(self.main_doors)
         self.moved = False
@@ -63,19 +63,7 @@ class EndLevel(PrologueLevel):
 
     def camera_update(self, x):
         if self.cam_coord < 640:
-            if self.bg_frames[-1].rect.x + x > 50:
-                x = 50 - self.bg_frames[-1].rect.x
-            for el in self.bg_frames:
-                el.move_frame(x, 0)
-            for el in self.decor:
-                el.move_frame(x, 0)
-            for el in self.main_doors:
-                el.move_frame(x, 0)
-            if x > 0 or self.border_coord < self.ideal_border_coord:
-                self.border_coord -= x
-            if self.border_coord + self.border_space < self.ideal_border_coord:
-                self.ideal_border_coord = self.border_coord + self.border_space
-            self.cam_coord -= x
+            super().camera_update(x)
         else:
             self.end_movement()
 
@@ -104,17 +92,7 @@ class EndLevel(PrologueLevel):
         self.cam_coord -= x
 
     def check_movement(self):
-        pressed = pygame.key.get_pressed()
-        if pressed[pygame.K_LSHIFT]:
-            if pressed[pygame.K_LEFT]:
-                self.camera_update(360 / self.FPS)
-            if pressed[pygame.K_RIGHT]:
-                self.camera_update(-360 / self.FPS)
-        elif pressed[pygame.K_LEFT]:
-            self.camera_update(240 / self.FPS)
-        elif pressed[pygame.K_RIGHT]:
-            self.camera_update(-240 / self.FPS)
-        self.mage.update(pressed, self.bottom_border, self.borders, self.border_roof)
+        super().check_movement()
 
     def end_movement(self):
         self.end_of_the_end = True

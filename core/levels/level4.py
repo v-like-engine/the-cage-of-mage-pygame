@@ -2,6 +2,7 @@ import pygame
 
 from core.classes.door_load import Door
 from core.classes.key_load import Key
+from core.levels.end_level import EndLevel
 from core.levels.level_mask import LevelMask
 from utils.load_image import load_image
 from core.classes.moving_platform_load import MovingPlatform
@@ -93,6 +94,7 @@ class Level4(LevelMask):
             if event.key == pygame.K_RETURN and self.passed and self.mage.x - 50 <= \
                     self.door.x and self.door.is_opened:
                 self.save('EndLevel')
+                New = EndLevel(self.width, self.height, 0.0)
                 self.stop = True
 
     def restart(self):
