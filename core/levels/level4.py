@@ -35,10 +35,6 @@ class Level4(LevelMask):
         self.platforms_list.append(self.platform)
         self.all_sprites.add(self.platform)
 
-        self.platform = Platform(self.platforms, load_image('platforms/double_grey.png'), self.screen, 310, 70)
-        self.platforms_list.append(self.platform)
-        self.all_sprites.add(self.platform)
-
     def draw_moving_platforms(self):
         self.platform = MovingPlatform(self.platforms,
                                        load_image('platforms/spiky_grey.png'), self.screen, 1280, 400, 500, 400, 1280, 400,
