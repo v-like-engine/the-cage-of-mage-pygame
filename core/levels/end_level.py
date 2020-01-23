@@ -1,7 +1,7 @@
 import pygame
 
 from core.classes.background_sprites import Decoration
-from core.i.captions import Captions
+from core.additional_game_processes.captions import Captions
 from core.levels.prologue_level import PrologueLevel
 
 
