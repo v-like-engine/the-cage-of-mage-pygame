@@ -1,6 +1,6 @@
 import pygame
 
-from camera_level_mask import CameraLevel
+from core.levels.camera_level_mask import CameraLevel
 from core.classes.background_sprites import Decoration, Message
 from core.classes.door_load import Door
 from core.classes.effects import ScreenEffect

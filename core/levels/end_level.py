@@ -1,6 +1,6 @@
 import pygame
 
-from camera_level_mask import CameraLevel
+from core.levels.camera_level_mask import CameraLevel
 from core.classes.background_sprites import Decoration
 from core.additional_game_processes.captions import Captions
 
