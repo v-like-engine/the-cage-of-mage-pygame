@@ -29,7 +29,7 @@ class TheCageOfMage(Game):
         try:
             self.x = self.width // 3 * 2
             self.y = self.height // 4
-            texts = ['Continue', 'New game']
+            texts = ['Continue', 'New game', 'Exit']
             for i in range(len(texts)):
                 new_btn = MainMenuButton(self.buttons_sprites, self.screen, self.x,
                                          self.y + self.height // 5 * i + 10 * i,
