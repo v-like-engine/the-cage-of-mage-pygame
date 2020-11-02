@@ -52,7 +52,7 @@ class Comics(Game):
                 pygame.mixer_music.stop()
                 pygame.mixer_music.load('data/Arti-Fix - Cybernetic Sect.mp3')
                 pygame.mixer_music.set_volume(0.049)
-                pygame.mixer_music.play(10, 6.0)
+                pygame.mixer_music.play(10, 0.0)
             if self.ticks <= self.FPS * 12:
                 self.comics_image_group = None
             elif self.ticks <= self.FPS * 29:

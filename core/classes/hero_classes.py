@@ -34,8 +34,8 @@ class AnimatedSprite(pygame.sprite.Sprite):
 
 class Mage(AnimatedSprite):
     def __init__(self, x, y, hor_v, run_v, vert_v, fps, platforms, cam=False, *box_group):
-        self.height = 240
-        self.width = 160
+        self.height = 180
+        self.width = 120
         super().__init__(load_image('mage_pictures.png'), 8, 4, x, y, self.width, self.height)
         self.movement_coefficients = [0, 0]
         self.direction = 0
