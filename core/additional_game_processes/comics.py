@@ -39,35 +39,35 @@ class Comics(Game):
                 self.handle_event(event)
             self.loop()
             self.screen.fill(pygame.Color('black'))
-            self.number_of_text = int(self.ticks // (self.FPS * (61.4 / len(self.text))))
-            if self.number_of_text > len(self.text) - 1:
-                New = TheCageOfMage(self.width, self.height)
+            self.number_of_text = min(len(self.text) - 1, int(self.ticks // (self.FPS * (69.9 / len(self.text)))))
+            if self.number_of_text == len(self.text) - 1 and self.ticks / self.FPS > 71:
+                TheCageOfMage(self.width, self.height)
                 return
-            if self.ticks == self.FPS * 4:
+            swap_time = (self.FPS * 8.2, self.FPS * 16.8, self.FPS * 25.4, self.FPS * 34, self.FPS * 42.6)
+            if self.ticks == self.FPS * 0:
                 pygame.mixer_music.stop()
                 pygame.mixer_music.load('data/Arti-Fix - Cybernetic Sect.mp3')
                 pygame.mixer_music.set_volume(0.049)
-                pygame.mixer_music.play(10, 0.0)
-            if self.ticks == self.FPS * 22:
+                pygame.mixer_music.play(10, 4.6)
+            elif self.ticks in swap_time:
                 pygame.mixer_music.stop()
                 pygame.mixer_music.load('data/Arti-Fix - Cybernetic Sect.mp3')
                 pygame.mixer_music.set_volume(0.049)
-                pygame.mixer_music.play(10, 0.0)
-            if self.ticks <= self.FPS * 12:
+                pygame.mixer_music.play(10, 12.8)
+            if self.ticks <= self.FPS * 18.64:
                 self.comics_image_group = None
-            elif self.ticks <= self.FPS * 29:
+            elif self.ticks <= self.FPS * 32.62:
                 self.comics_image_group = self.dragon_group
-            elif self.ticks <= self.FPS * 41:
+            elif self.ticks <= self.FPS * 46.6:
                 self.comics_image_group = self.mage_escape_group
-            elif self.ticks <= self.FPS * 54:
+            elif self.ticks <= self.FPS * 60.58:
                 self.comics_image_group = self.throne_group
-            elif self.ticks <= self.FPS * 62:
+            elif self.ticks <= self.FPS * 72:
                 self.comics_image_group = None
             else:
                 return
             self.draw_images()
             self.draw_text()
-            self.render()
             self.ticks += 1
             pygame.display.flip()
             if self.stop:
